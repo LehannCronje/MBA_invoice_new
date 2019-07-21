@@ -1,0 +1,22 @@
+{
+  "name": "mba-invoice-new",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "@nativedocuments/docx-wasm": "^2.2.13-1561490777",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "docxtemplater": "^3.13.6",
+    "express": "~4.16.1",
+    "hbs": "~4.0.4",
+    "http-errors": "~1.6.3",
+    "jszip": "^2.6.1",
+    "morgan": "~1.9.1",
+    "mysql": "^2.17.1",
+    "node-datetime": "^2.1.2",
+    "path": "^0.12.7"
+  }
+}

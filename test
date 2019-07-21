@@ -1,0 +1,52 @@
+// var sup = {
+//     name: 'Aquila Africa Limited',
+//     regNo: 'C123101 C1/GBL',
+//     licenceNo: 'C114013067',
+//     vatNo: '',
+//     building:'',
+//     addressNum:'33',
+//     addressStreet: 'Edith Street',
+//     addressCity: 'Port-Louis',
+//     addressCountry:'Mauritius',
+//     backAcc: 'AfrAsia Bank',
+//     corBank: 'Firstrand Bank Ltd',
+//     contactPerson:'',
+//     contactNo:'',
+//     emailAddr: '',
+//     invoiceNote: 'Exporter note that should be inserted here'
+// }
+// var sup = {
+//     name: 'Datasmart hong kong limited',
+//     regNo: '2337214',
+//     licenceNo: '',
+//     vatNo: '',
+//     building:'11th Floor, Tern Centre',
+//     addressNum:'251',
+//     addressStreet: 'Queens Road Central',
+//     addressCity: 'Sheung Wan',
+//     addressCountry:'Hong Kong',
+//     backAcc: '',
+//     corBank: '',
+//     contactPerson:'Sharma Busgeeth',
+//     contactNo:'+230 5445 1005',
+//     emailAddr: 'admin@datasmart.hk',
+//     invoiceNote: ''
+// }
+
+// var cust = {
+//     name: 'Scuderia South Afica (PTY) LTD',
+//     regNo: '',
+//     licenceNo: '00652837',
+//     vatNo: '',
+//     building:'',
+//     addressNum:'1',
+//     addressStreet: 'Bruton Road',
+//     addressCity: 'Braynston',
+//     addressCountry:'South-Africa',
+//     backAcc: '',
+//     corBank: '',
+//     contactPerson:'Scuderia Contact person',
+//     contactNo:'',
+//     emailAddr: '',
+//     invoiceNote: ''
+// }

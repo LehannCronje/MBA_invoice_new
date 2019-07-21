@@ -1,0 +1,56 @@
+<script>
+$(document).ready(function(){
+   
+    
+});
+</script>
+<script>
+    i=1;
+    function deleteElem(elem){
+        elem.parentElement.parentElement.remove();
+    }
+    function addElem(elem){
+        var id = $(elem).parent().parent().attr('id');
+        $('<div id=item'+(i)+'></div>').insertAfter('#'+id);
+        $('#item').find(".content").clone().appendTo('#item'+i);
+        //$('#item'+i).find('input').attr('name','data'+i);
+        $('#item'+i).find('button').attr('id','delete'+i);
+        i++;
+    }
+</script>
+<div id="item" style="display:none;">
+    <div class="content">
+        <select name="goodsD" id="goodsD">
+        {{#each goodsD}}
+             <option value="{{this.ProdCode}},{{this.ProdDescription}}">{{this.ProdDescription}}</option>
+        {{/each}}
+        </select>
+        <input type="text" name="data">
+        <input value='add' type="button" name='add' onclick='addElem(this)' >
+        <input value='delete' type="button" name='delete' onclick='deleteElem(this)' >
+    </div>
+</div>
+<div id="form-container">
+    <form id='goodsForm' action="/generateInvoice" method="POST">
+    <input type="text" name='sup' id="supField" value={{supD}}>
+    <input type="text" name='client' id="clientField" value={{clientD}}>
+        <div class="goods">
+            <div id="item0">
+                <div class="content">
+                    <select name="goodsD" id="goodsD">
+                    {{#each goodsD}}
+                        <option value="{{this.ProdCode}},{{this.ProdDescription}}">{{this.ProdDescription}}</option>
+                    {{/each}}
+                    </select>
+                    <input type="text" name="data">
+                    <input value='add' type="button" name='add' onclick='addElem(this)' >
+                    <input value='delete' type="button" name='delete' onclick='deleteElem(this)' >
+                </div>
+            </div>
+        </div>
+        <input id='goodsSubmit' type="submit" value="submit">
+    </form>
+</div>
+<a href="/generatePDF">Generate Invoices</a>
+<a href="/download">download</a>
+<a href="/pdf/invoice1.pdf" target="_blank">preview</a>
