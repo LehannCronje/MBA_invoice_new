@@ -25,32 +25,48 @@ $(document).ready(function(){
              <option value="{{this.ProdCode}},{{this.ProdDescription}}">{{this.ProdDescription}}</option>
         {{/each}}
         </select>
+        <input type="text" name="quan">
         <input type="text" name="data">
         <input value='add' type="button" name='add' onclick='addElem(this)' >
         <input value='delete' type="button" name='delete' onclick='deleteElem(this)' >
     </div>
 </div>
-<div id="form-container">
-    <form id='goodsForm' action="/generateInvoice" method="POST">
-    <input type="text" name='sup' id="supField" value={{supD}}>
-    <input type="text" name='client' id="clientField" value={{clientD}}>
-        <div class="goods">
-            <div id="item0">
-                <div class="content">
-                    <select name="goodsD" id="goodsD">
-                    {{#each goodsD}}
-                        <option value="{{this.ProdCode}},{{this.ProdDescription}}">{{this.ProdDescription}}</option>
-                    {{/each}}
-                    </select>
-                    <input type="text" name="data">
-                    <input value='add' type="button" name='add' onclick='addElem(this)' >
-                    <input value='delete' type="button" name='delete' onclick='deleteElem(this)' >
-                </div>
+<div class="container-fluid login-container d-flex align-items-center justify-content-center">
+    <div class="row d-flex align-items-center justify-content-center">
+        <div class="invoice-wrapper col-12">
+            <h1>Build Invoice</h1>
+            <div class="form-wrapper">
+                <form id='goodsForm' action="/generateInvoice" method="POST">
+                <label for="">Supplier:</label>
+                <input type="text" name='sup' id="supField" value={{supD}}>
+                <label for="">Client:</label>
+                <input type="text" name='client' id="clientField" value={{clientD}}>
+                    <div class="goods">
+                        <div class="labels">
+                            <label for="">Product:</label>
+                            <label for="">Quantity:</label>
+                            <label for="">Amount:</label>
+                        </div>
+                        <div id="item0">
+                            <div class="content">
+                                <select name="goodsD" id="goodsD">
+                                {{#each goodsD}}
+                                    <option value="{{this.ProdCode}},{{this.ProdDescription}}">{{this.ProdDescription}}</option>
+                                {{/each}}
+                                </select>
+                                <input type="text" name="quan">
+                                <input type="text" name="data">
+                                <input value='add' type="button" name='add' onclick='addElem(this)' >
+                                <input value='delete' type="button" name='delete' onclick='deleteElem(this)' >
+                            </div>
+                        </div>
+                    </div>
+                    <input id='goodsSubmit' type="submit" value="submit">
+                </form>
             </div>
         </div>
-        <input id='goodsSubmit' type="submit" value="submit">
-    </form>
+    </div>
 </div>
-<a href="/generatePDF">Generate Invoices</a>
+{{!-- <a href="/generatePDF">Generate Invoices</a>
 <a href="/download">download</a>
-<a href="/pdf/invoice1.pdf" target="_blank">preview</a>
+<a href="/pdf/invoice1.pdf" target="_blank">preview</a> --}}

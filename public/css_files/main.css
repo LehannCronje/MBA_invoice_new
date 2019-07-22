@@ -1,0 +1,72 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  background-color: rgba(54, 69, 79, 0.1); }
+
+.login-container {
+  height: 100vh;
+  text-align: center; }
+  .login-container .login-wrapper {
+    padding: 50px;
+    background-color: aliceblue;
+    -webkit-box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.2), 0 2px 30px 0 rgba(0, 0, 0, 0.35);
+            box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.2), 0 2px 30px 0 rgba(0, 0, 0, 0.35); }
+    .login-container .login-wrapper h1 {
+      text-transform: uppercase; }
+    .login-container .login-wrapper .form-wrapper {
+      width: 400px; }
+    .login-container .login-wrapper input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0px;
+      border: solid 1px grey; }
+    .login-container .login-wrapper input[type=submit] {
+      background-color: #337ab7;
+      color: white;
+      font-weight: 600;
+      border: none;
+      text-transform: uppercase; }
+  .login-container .invoice-wrapper {
+    padding: 50px;
+    background-color: aliceblue;
+    -webkit-box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.2), 0 2px 30px 0 rgba(0, 0, 0, 0.35);
+            box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.2), 0 2px 30px 0 rgba(0, 0, 0, 0.35); }
+    .login-container .invoice-wrapper h1 {
+      text-transform: uppercase; }
+    .login-container .invoice-wrapper input {
+      padding: 10px;
+      margin: 10px 0px;
+      border: solid 1px #cfcfcf; }
+    .login-container .invoice-wrapper input[type=submit] {
+      background-color: #337ab7;
+      color: white;
+      font-weight: 600;
+      border: none;
+      text-transform: uppercase;
+      width: 90%; }
+    .login-container .invoice-wrapper input[type=button] {
+      background-color: #337ab7;
+      color: white;
+      font-weight: 600;
+      border: none;
+      text-transform: uppercase; }
+    .login-container .invoice-wrapper select {
+      padding: 10px;
+      margin: 10px 0px;
+      border: solid 1px #cfcfcf; }
+    .login-container .invoice-wrapper .labels {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: start;
+      -webkit-justify-content: flex-start;
+          -ms-flex-pack: start;
+              justify-content: flex-start; }
+      .login-container .invoice-wrapper .labels label {
+        margin-right: 148px; }
+      .login-container .invoice-wrapper .labels label:first-child {
+        margin-right: 270px; }
+      .login-container .invoice-wrapper .labels label:last-child {
+        margin-right: 0px; }
