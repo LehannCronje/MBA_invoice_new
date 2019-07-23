@@ -14,8 +14,6 @@ html, body {
             box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.2), 0 2px 30px 0 rgba(0, 0, 0, 0.35); }
     .login-container .login-wrapper h1 {
       text-transform: uppercase; }
-    .login-container .login-wrapper .form-wrapper {
-      width: 400px; }
     .login-container .login-wrapper input {
       width: 100%;
       padding: 10px;
@@ -27,6 +25,13 @@ html, body {
       font-weight: 600;
       border: none;
       text-transform: uppercase; }
+    .login-container .login-wrapper select {
+      padding: 10px;
+      margin: 10px 0px;
+      border: solid 1px #cfcfcf; }
+    .login-container .login-wrapper div {
+      display: block;
+      text-align: left; }
   .login-container .invoice-wrapper {
     padding: 50px;
     background-color: aliceblue;

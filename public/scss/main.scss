@@ -17,9 +17,7 @@ html, body{
         h1{
             text-transform: uppercase;
         }
-        .form-wrapper{
-            width:400px;
-        }
+        
         input{
             width:100%;
             padding:10px;
@@ -33,6 +31,15 @@ html, body{
             font-weight:600;
             border:none;
             text-transform: uppercase;
+        }
+        select{
+            padding:10px;
+            margin:10px 0px;
+            border:solid 1px rgb(207, 207, 207);
+        }
+        div{
+            display:block;
+            text-align: left;
         }
     }
     .invoice-wrapper{
