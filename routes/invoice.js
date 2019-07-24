@@ -17,7 +17,7 @@ function getProducts(req,res,next){
     req.sup = req.body.sup;
     req.session.sup = req.body.sup;
     req.session.client = req.body.client;
-
+    console.log(req.session.client)
     db.query(sql, (error,results,fields) => {
         if(error){
             return console.error(error.message);
@@ -41,7 +41,7 @@ function getProducts(req,res,next){
 };
 
 function renderInvoice(req,res){
-    res.render('invoice', {goodsD: req.goodsData, clientD: req.client, supD: req.sup});
+    res.render('invoice', {goodsD: req.goodsData, clientD: req.session.client, supD: req.session.sup});
 }
 
 module.exports = router;
