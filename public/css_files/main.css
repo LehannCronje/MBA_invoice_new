@@ -75,3 +75,25 @@ html, body {
         margin-right: 270px; }
       .login-container .invoice-wrapper .labels label:last-child {
         margin-right: 0px; }
+  .login-container .preview-wrapper button {
+    width: 100%;
+    display: inline-block;
+    padding: 10px;
+    margin: 10px 0px;
+    background-color: #337ab7;
+    color: white;
+    font-weight: 600;
+    border: none;
+    text-transform: uppercase; }
+    .login-container .preview-wrapper button a {
+      color: white;
+      text-decoration: none; }
+  .login-container .preview-wrapper input[type=button] {
+    display: inline-block;
+    padding: 10px;
+    margin: 10px 0px;
+    background-color: #337ab7;
+    color: white;
+    font-weight: 600;
+    border: none;
+    text-transform: uppercase; }

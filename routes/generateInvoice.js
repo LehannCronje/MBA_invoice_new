@@ -3,8 +3,8 @@ var router = express.Router();
 var invoice = require('../utils/generate_Invoices');
 var db = require('../utils/db_config');
 const session = require('express-session');
-var zip = require('express-zip');
-var path = require('path');
+
+const PDFMerge = require('pdf-merge');
 
 var supCodes = [
     ['Africa',1001],
@@ -15,13 +15,8 @@ var clientCodes = [
 ];
 
 /* GET home page. */
-router.post('/',getSupClientBa,genInvoices, (req,res)=>{
-    res.zip([
-        {path: './public/pdf/invoice1.pdf', name: 'invoice1.pdf'},
-        {path: './public/pdf/invoice2.pdf', name: 'invoice2.pdf'},
-        {path: './public/pdf/invoice3.pdf', name: 'invoice3.pdf'}
-    ])
-    // res.render('invoice', {goodsD: req.session.goodsData, clientD: req.session.client, supD: req.session.sup});
+router.post('/',getSupClientBa,genInvoices,mergeInvoices, (req,res)=>{
+    res.render('pD');
 });
 
 function genInvoices(req,res,next){
@@ -51,42 +46,51 @@ function genInvoices(req,res,next){
 }
 
 function getSupClientBa(req,res,next){
-    var sql = 'select * from customer';
-    for(var i=0;i<clientCodes.length;i++){
-        if(req.body.client == clientCodes[i][0]){
-            db.query(sql, (error,results,fields) => {
-                if(error){
-                    return console.error(error.message);
-                }
-                req.client = results;
-                
-            })
+    var sql = 'select * from customer where CustomerID=1001';
+    db.query(sql, (error,results,fields) => {
+        if(error){
+            return console.error(error.message);
         }
-    }
-    var sql = 'select * from supplier'
-    for(var i=0;i<supCodes.length;i++){
-        if(req.body.sup == supCodes[i][0]){
-            db.query(sql, (error,results,fields) => {
-                if(error){
-                    return console.error(error.message);
-                }
-                req.sup = results;
-            })
+        req.client = results;
+        
+    })
+    // for(var i=0;i<clientCodes.length;i++){
+    //     if(req.body.client == clientCodes[i][0]){
+            
+    //     }
+    // }
+    var sql = 'select * from supplier where SupplierID=1001'
+    db.query(sql, (error,results,fields) => {
+        if(error){
+            return console.error(error.message);
         }
-    }
+        req.sup = results;
+    })
+    // for(var i=0;i<supCodes.length;i++){
+    //     if(req.body.sup == supCodes[i][0]){
+    //     }
+    // }
     var sql = 'select * from buyingagent where BA_ID=1001'
-    for(var i=0;i<supCodes.length;i++){
-        if(req.body.sup == supCodes[i][0]){
-            db.query(sql, (error,results,fields) => {
-                if(error){
-                    return console.error(error.message);
-                }
-                req.ba = results;
-                return next();
-            })
+    db.query(sql, (error,results,fields) => {
+        if(error){
+            return console.error(error.message);
         }
-    }
+        req.ba = results;
+        return next();
+    })
+    // for(var i=0;i<supCodes.length;i++){
+    //     if(req.body.sup == supCodes[i][0]){
+    //     }
+    // }
     
 }
-
+function mergeInvoices(req,res,next){
+    const files = [
+        `./public/pdf/invoice1.pdf`,
+        `./public/pdf/invoice2.pdf`,
+        `./public/pdf/invoice3.pdf`
+    ];
+    PDFMerge(files, {output: `./public/pdf/merge.pdf`})
+    .then((buffer) => {return next()});
+}
 module.exports = router;
