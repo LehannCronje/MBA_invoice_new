@@ -46,7 +46,7 @@ function genInvoices(req,res,next){
 }
 
 function getSupClientBa(req,res,next){
-    var sql = 'select * from customer where CustomerID=1001';
+    var sql = 'select * from Customer where CustomerID=1001';
     db.query(sql, (error,results,fields) => {
         if(error){
             return console.error(error.message);
@@ -59,7 +59,7 @@ function getSupClientBa(req,res,next){
             
     //     }
     // }
-    var sql = 'select * from supplier where SupplierID=1001'
+    var sql = 'select * from Supplier where SupplierID=1001'
     db.query(sql, (error,results,fields) => {
         if(error){
             return console.error(error.message);
@@ -70,7 +70,7 @@ function getSupClientBa(req,res,next){
     //     if(req.body.sup == supCodes[i][0]){
     //     }
     // }
-    var sql = 'select * from buyingagent where BA_ID=1001'
+    var sql = 'select * from BuyingAgent where BA_ID=1001'
     db.query(sql, (error,results,fields) => {
         if(error){
             return console.error(error.message);

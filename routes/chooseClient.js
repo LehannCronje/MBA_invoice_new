@@ -7,14 +7,14 @@ router.post('/', getClientSups,(req,res, next) => {
 });
 
 function getClientSups(req,res,next){
-    var sql = 'select Cust_Name from customer where CustomerID = 1001';
+    var sql = 'select Cust_Name from Customer where CustomerID = 1001';
     db.query(sql, (error,results,fields) => {
         if(error){
             return console.error(error.message);
         }
         req.client = results[0].Cust_Name;
     });
-    var sql = 'select SupplierName from supplier where SupplierID = 1001';
+    var sql = 'select SupplierName from Supplier where SupplierID = 1001';
     db.query(sql, (error,results,fields) => {
         if(error){
             return console.error(error.message);

@@ -11,7 +11,7 @@ var clientCodes = [
 router.post('/', getProducts,renderInvoice);
 
 function getProducts(req,res,next){
-    var sql = 'SELECT * FROM product WHERE SupplierID=1001';
+    var sql = 'SELECT * FROM Product WHERE SupplierID=1001';
     console.log(req.body)
     req.client = req.body.client;
     req.sup = req.body.sup;
