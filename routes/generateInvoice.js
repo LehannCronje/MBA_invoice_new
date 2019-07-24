@@ -46,8 +46,8 @@ function genInvoices(req,res,next){
 }
 
 function getSupClientBa(req,res,next){
-    var sql = 'select * from Customer where CustomerID=1001';
-    db.query(sql, (error,results,fields) => {
+    var sql = 'select * from Customer where Cust_Name=?';
+    db.query(sql,req.body.client ,(error,results,fields) => {
         if(error){
             return console.error(error.message);
         }
@@ -59,8 +59,8 @@ function getSupClientBa(req,res,next){
             
     //     }
     // }
-    var sql = 'select * from Supplier where SupplierID=1001'
-    db.query(sql, (error,results,fields) => {
+    var sql = 'select * from Supplier where SupplierName=?'
+    db.query(sql, req.body.sup,(error,results,fields) => {
         if(error){
             return console.error(error.message);
         }

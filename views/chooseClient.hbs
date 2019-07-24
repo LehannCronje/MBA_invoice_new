@@ -7,13 +7,17 @@
                 <div>
                     <label for="SupSelect">Supplier:</label>
                     <select name="sup" id="SupSelect">
-                        <option value="{{sup}}">{{sup}}</option>
+                        {{#each sup}}
+                        <option value="{{this.SupplierName}}">{{this.SupplierName}}</option>
+                        {{/each}}
                     </select>
                 </div>
                 <div>
                     <label for="clientSelect">Client:</label>
                     <select name="client" id="clientSelect">
-                        <option value="{{client}}">{{client}}</option>
+                        {{#each client}}
+                        <option value="{{this.Cust_Name}}">{{this.Cust_Name}}</option>
+                        {{/each}}
                     </select>
                 </div>
                     <input type="submit">
