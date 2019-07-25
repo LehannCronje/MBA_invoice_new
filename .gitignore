@@ -1,2 +1,4 @@
 /node_modules
 /invoices
+/public/pdf
+package-lock.json
