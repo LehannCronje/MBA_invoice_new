@@ -16,6 +16,7 @@ var clientCodes = [
 
 /* GET home page. */
 router.post('/',getSupClientBa,genInvoices,mergeInvoices, (req,res)=>{
+    console.log(req.body);
     res.render('pD');
 });
 
@@ -27,6 +28,18 @@ function genInvoices(req,res,next){
     object[3] = req.ba[0];
     object[4] = req.body.quan;
     req.session.goodsData = req.body.goodsD;
+    var general = {
+        supInvNum: req.body.supInvNum,
+        supInvDate: req.body.supInvDate,
+        custAccNum: req.body.custAccNum,
+        customsVal: req.body.customsVal,
+        totalDuty: req.body.totalDuty,
+        vat: req.body.vat,
+        discount: req.body.discount,
+        shipHan: req.body.shipHan,
+        weight: req.body.weight
+
+    }
     var new_goods = [];
     if(Array.isArray(object[2])){
         for(var i=0;i<object[2].length;i++){
@@ -37,8 +50,7 @@ function genInvoices(req,res,next){
         var split = object[2].split(',');
             new_goods.push([split[0],split[1],object[4],req.body.data]);
     }
-    console.log(new_goods);
-    invoice.createDocx(new_goods,object[1],object[0],object[3],() =>{
+    invoice.createDocx(new_goods,object[1],object[0],object[3],general,() =>{
         invoice.createPDF(12,(data)=>{
             return next();
         })

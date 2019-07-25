@@ -1,13 +1,12 @@
 html, body{
     padding:0;
     margin:0;
-    min-height:100vh;
+    min-height: 100vh;
     background-color: rgba(54, 69, 79, 0.1);
     // background-image: linear-gradient(to bottom left, white, rgb(51,122,183));
 }
 
 .login-container{
-    height:100vh;
     text-align: center;
     .login-wrapper{
         padding:50px;
@@ -43,13 +42,12 @@ html, body{
         }
     }
     .invoice-wrapper{
+        
         padding:50px;
         background-color:rgb(240,248,255);
         // border-radius:5px;
         box-shadow: 0 2px 22px 0 rgba(0,0,0,.2), 0 2px 30px 0 rgba(0,0,0,.35);
-        h1{
-            text-transform: uppercase;
-        }
+        margin-bottom:50px;
         input{
             padding:10px;
             margin:10px 0px;
@@ -62,7 +60,7 @@ html, body{
             font-weight:600;
             border:none;
             text-transform: uppercase;
-            width:90%;
+            width:250px;
         }
         input[type=button]{
             background-color:rgb(51,122,183);
@@ -115,6 +113,26 @@ html, body{
             font-weight:600;
             border:none;
             text-transform: uppercase;
+        }
+    }
+}
+.form-wrapper{
+    .top-input-form{
+        text-align: start;
+        h3{
+            text-align: center;
+        }
+        .top-input-form-item{
+           display: flex;
+           justify-content: center;
+           align-items: center;
+            div{
+                display: inline-block;
+                width:180px;
+            }
+            input{
+                width:250px;
+            }
         }
     }
 }

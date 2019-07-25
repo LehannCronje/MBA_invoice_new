@@ -13,7 +13,6 @@ function getClientSups(req,res,next){
             return console.error(error.message);
         }
         req.client = results;
-        console.log(results)
     });
     var sql = 'select SupplierName from Supplier';
     db.query(sql, (error,results,fields) => {

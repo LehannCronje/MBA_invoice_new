@@ -5,7 +5,6 @@ html, body {
   background-color: rgba(54, 69, 79, 0.1); }
 
 .login-container {
-  height: 100vh;
   text-align: center; }
   .login-container .login-wrapper {
     padding: 50px;
@@ -36,9 +35,8 @@ html, body {
     padding: 50px;
     background-color: aliceblue;
     -webkit-box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.2), 0 2px 30px 0 rgba(0, 0, 0, 0.35);
-            box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.2), 0 2px 30px 0 rgba(0, 0, 0, 0.35); }
-    .login-container .invoice-wrapper h1 {
-      text-transform: uppercase; }
+            box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.2), 0 2px 30px 0 rgba(0, 0, 0, 0.35);
+    margin-bottom: 50px; }
     .login-container .invoice-wrapper input {
       padding: 10px;
       margin: 10px 0px;
@@ -49,7 +47,7 @@ html, body {
       font-weight: 600;
       border: none;
       text-transform: uppercase;
-      width: 90%; }
+      width: 250px; }
     .login-container .invoice-wrapper input[type=button] {
       background-color: #337ab7;
       color: white;
@@ -97,3 +95,26 @@ html, body {
     font-weight: 600;
     border: none;
     text-transform: uppercase; }
+
+.form-wrapper .top-input-form {
+  text-align: start; }
+  .form-wrapper .top-input-form h3 {
+    text-align: center; }
+  .form-wrapper .top-input-form .top-input-form-item {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center; }
+    .form-wrapper .top-input-form .top-input-form-item div {
+      display: inline-block;
+      width: 180px; }
+    .form-wrapper .top-input-form .top-input-form-item input {
+      width: 250px; }

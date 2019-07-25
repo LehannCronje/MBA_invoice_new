@@ -4,15 +4,15 @@ var JSZip = require('jszip');
 var Docxtemplater = require('docxtemplater');
 var dateTime = require('node-datetime');
 const docx = require("@nativedocuments/docx-wasm");
+var subt = 0;
 
 
+exports.createDocx = function(data,sup,cust,ba, general,callback){
 
-exports.createDocx = function(data,sup,cust,ba, callback){
 
-
-    createInvoice1(data,sup,cust);
-    createInvoice2(4000,sup,ba);
-    createInvoice3(4000,ba,cust);
+    createInvoice1(data,sup,cust,general);
+    createInvoice2(subt,sup,ba,general);
+    createInvoice3(subt,ba,cust,general);
    
     callback(true);
 }
@@ -50,27 +50,29 @@ exports.createPDF = function(data, callback){
     }).catch((e) => {
         console.error(e);
     });
-    fs.watchFile("./public/pdf/invoice1.pdf", (curr,prev)=>{
+    fs.watchFile("./public/pdf/invoice3.pdf", (curr,prev)=>{
         callback(true);
     })
     
 };
 
-function createInvoice1(data,sup,cust){
+function createInvoice1(data,sup,cust,general){
     var itemsSubT = 0;
     var quantity = 1;
     var invoice_items = [];
     for(var i=0; i<data.length;i++){
         invoice_items[i] = [{
-                pDescription: data[i][0],
-                pCode: data[i][1],
+                pDescription: data[i][1],
+                pCode: data[i][0],
                 pQuan:data[i][2],
-                pPrice: data[i][3],
-                pTotal: data[i][3] * data[i][2]
+                pPrice: (data[i][3]) * .85,
+                pTotal: (data[i][3] * data[i][2]) * .85
             },
         ];
         itemsSubT = itemsSubT + (data[i][3] * data[i][2]);
     }
+    setSubT(itemsSubT);
+    itemsSubT = itemsSubT * .85;
     // console.log(data);
     // console.log(invoice_items);
     var content = fs
@@ -88,9 +90,9 @@ function createInvoice1(data,sup,cust){
         sAddressNum: sup.Addr_Number,
         sStreet: sup.Addr_Street,
         sCity: sup.Addr_City,
-        invNo:'inv7007',
-        date: dt,
-        custAccNo: "SA75001Vxx",
+        invNo:general.supInvNum,
+        date: general.supInvDate,
+        custAccNo: general.custAccNum,
         terms:'',
         rName: cust.Cust_Name,
         rAddressNum:cust.Addr_Number,
@@ -102,11 +104,18 @@ function createInvoice1(data,sup,cust){
         cEmail: cust.Pers_Email,
         items: invoice_items,
         subT: itemsSubT,
-        vat:'',
-        shipHan:'',
-        disc:'',
+        vat:general.vat,
+        shipHan:general.shipHan,
+        disc:general.discount,
+        weight: general.weight,
         total:itemsSubT,
-        footNote:sup.InvoiceFootNote,
+        footnote:sup.InvoiceFootNote,
+        bankName: sup.Bank_Name,
+        ibanAccNum:sup.Bank_IBAN_AccNumber,
+        bankSwift:sup.Bank_SWIFTcode,
+        corBankName:sup.CorBank_Name,
+        corIbanAccNum:sup.CorBank_AccNumber,
+        corBankSwift:sup.CorBank_SWIFTcode,
     });
     try {
         // render the document ie replace the variables
@@ -128,7 +137,7 @@ function createInvoice1(data,sup,cust){
     fs.writeFileSync(path.resolve(__dirname, '../invoices/invoice1.docx'), buf);
 }
 
-function createInvoice2(data,sup,cust){
+function createInvoice2(data,sup,cust,general){
     var content = fs
     .readFileSync(path.resolve(__dirname, '../templates/DS_invoice1.docx'), 'binary');
 
@@ -145,9 +154,9 @@ doc.setData({
     sAddressNum: sup.Addr_Number,
     sStreet: sup.Addr_Street,
     sCity: sup.Addr_City,
-    invNo:'inv7007',
-    date: dt,
-    custAccNo: "SA75001Vxx",
+    invNo:general.supInvNum,
+    date: general.supInvDate,
+    custAccNo: general.custAccNum,
     terms:'',
     rName: cust.Cust_Name,
     rAddressNum:cust.Addr_Number,
@@ -163,14 +172,20 @@ doc.setData({
     pPrice: 'N/A',
     pTotal: data,
     ordering: 'ordering',
-    invNo: 'INV7007',
-    custAcc:'SA75001Vxx',
+    invNo: general.supInvNum,
+    custAcc:general.custAccNum,
     subT: data,
-    vat:'',
-    shipHan:'',
-    disc:'',
+    vat:general.vat,
+    shipHan:general.shipHan,
+    disc:general.discount,
     total:data,
-    footNote:sup.invoiceNote
+    footnote:sup.invoiceNote,
+    bankName: sup.Bank_Name,
+    ibanAccNum:sup.Bank_IBAN_AccNumber,
+    bankSwift:sup.Bank_SWIFTcode,
+    corBankName:sup.CorBank_Name,
+    corIbanAccNum:sup.CorBank_AccNumber,
+    corBankSwift:sup.CorBank_SWIFTcode,
 });
 
 try {
@@ -192,9 +207,9 @@ var buf = doc.getZip()
              .generate({type: 'nodebuffer'});
 fs.writeFileSync(path.resolve(__dirname, '../invoices/invoice2.docx'), buf);
 }
-function createInvoice3(data,sup,cust){
+function createInvoice3(data,sup,cust,general){
     var content = fs
-    .readFileSync(path.resolve(__dirname, '../templates/DS_invoice1.docx'), 'binary');
+    .readFileSync(path.resolve(__dirname, '../templates/DS_invoice2.docx'), 'binary');
 
 var zip = new JSZip(content);
 var doc = new Docxtemplater();
@@ -203,14 +218,14 @@ var dt = dateTime.create().format('Y-m-d');
 doc.loadZip(zip);
 //set the templateVariables
 doc.setData({
-    sName: sup.SupplierName,
-    sRegNo: sup.Supp_CompRegNo,
+    sName: sup.BA_Name,
+    sRegNo: sup.BA_CompRegNo,
     sAddressNum: sup.Addr_Number,
     sStreet: sup.Addr_Street,
     sCity: sup.Addr_City,
-    invNo:'inv7007',
-    date: dt,
-    custAccNo: "SA75001Vxx",
+    invNo:'inv60',
+    date: general.supInvDate,
+    custAccNo: general.custAccNum,
     terms:'',
     rName: cust.Cust_Name,
     rAddressNum:cust.Addr_Number,
@@ -226,13 +241,12 @@ doc.setData({
     pPrice: 'N/A',
     pTotal: data,
     ordering: '(Incl. registration and management of Ferari Contact Club membership)',
-    invNo: 'INV7007',
     subT: data,
-    vat:'',
-    shipHan:'',
-    disc:'',
+    vat:general.vat,
+    shipHan:general.shipHan,
+    disc:general.discount,
     total:data,
-    footNote:sup.invoiceNote
+    footnote:sup.invoiceNote
 });
 
 try {
@@ -253,4 +267,8 @@ catch (error) {
 var buf = doc.getZip()
              .generate({type: 'nodebuffer'});
 fs.writeFileSync(path.resolve(__dirname, '../invoices/invoice3.docx'), buf);
+}
+
+function setSubT(data){
+    subt = data * .15;
 }

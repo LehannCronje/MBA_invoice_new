@@ -12,12 +12,10 @@ router.post('/', getProducts,renderInvoice);
 
 function getProducts(req,res,next){
     var sql = 'SELECT * FROM Product WHERE SupplierID=1001';
-    console.log(req.body)
     req.client = req.body.client;
     req.sup = req.body.sup;
     req.session.sup = req.body.sup;
     req.session.client = req.body.client;
-    console.log(req.session.client)
     db.query(sql, (error,results,fields) => {
         if(error){
             return console.error(error.message);

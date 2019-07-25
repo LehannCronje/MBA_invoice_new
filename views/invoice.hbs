@@ -11,7 +11,8 @@ $(document).ready(function(){
     }
     function addElem(elem){
         var id = $(elem).parent().parent().attr('id');
-        $('<div id=item'+(i)+'></div>').insertAfter('#'+id);
+        {{!-- $('<div id=item'+(i)+'></div>').append('.goods'); --}}
+        $('.goods').append('<div id=item'+(i)+'></div>')
         $('#item').find(".content").clone().appendTo('#item'+i);
         //$('#item'+i).find('input').attr('name','data'+i);
         $('#item'+i).find('button').attr('id','delete'+i);
@@ -27,20 +28,87 @@ $(document).ready(function(){
         </select>
         <input type="text" name="quan">
         <input type="text" name="data">
-        <input value='add' type="button" name='add' onclick='addElem(this)' >
         <input value='delete' type="button" name='delete' onclick='deleteElem(this)' >
     </div>
 </div>
-<div class="container-fluid login-container d-flex align-items-center justify-content-center">
+<div class="container login-container">
     <div class="row d-flex align-items-center justify-content-center">
         <div class="invoice-wrapper col-12">
             <h1>Build Invoice</h1>
             <div class="form-wrapper">
                 <form id='goodsForm' action="/generateInvoice" method="POST">
                 <label for="">Supplier:</label>
-                <input type="text" name='sup' id="supField" value="{{supD}}">
+                <input type="text" name='sup' id="supField" value="{{supD}}" readonly>
                 <label for="">Client:</label>
-                <input type="text" name='client' id="clientField" value="{{clientD}}">
+                <input type="text" name='client' id="clientField" value="{{clientD}}" readonly>
+                <hr>
+                <div class="top-input-form">
+                    <h3>General Inputs</h3>
+                    <div class="top-input-form-item">
+                        <div>
+                            <label for="">Supplier invoice number</label>
+                        </div>
+                        <input type="text" name="supInvNum">
+                    </div>
+                    <div class="top-input-form-item">
+                        <div>
+                        <label for="">Supplier invoice Date</label>
+
+                        </div>
+                        <input type="text" name="supInvDate">
+                    </div>
+                    <div class="top-input-form-item">
+                        <div>
+                        <label for="">Customer Account Number</label>
+
+                        </div>
+                        <input type="text" name="custAccNum">
+                    </div>
+                    <div class="top-input-form-item">
+                        <div>
+                        <label for="">Customs Value</label>
+
+                        </div>
+                        <input type="text" name="customsVal">
+                    </div>
+                    <div class="top-input-form-item">
+                        <div>
+                        <label for="">Total Duty</label>
+
+                        </div>
+                        <input type="text" name="totalDuty">
+                    </div>
+                    <div class="top-input-form-item">
+                        <div>
+                        <label for="">VAT</label>
+
+                        </div>
+                        <input type="text" name="vat">
+                    </div>
+                    <div class="top-input-form-item">
+                        <div>
+                            
+                        <label for="">Discount</label>
+                        </div>
+                        <input type="text" name="discount">
+                    </div>
+                    <div class="top-input-form-item">
+                        <div>
+
+                        <label for="">Shipping 	&amp; Handling </label>
+                        </div>
+                        <input type="text" name="shipHan">
+                    </div>
+                    <div class="top-input-form-item">
+                        <div>
+
+                        <label for="">Weight</label>
+                        </div>
+                        <input type="text" name="weight">
+                    </div>
+                </div>
+                <hr>
+                <h3>Choose Products</h3>
                     <div class="goods">
                         <div class="labels">
                             <label for="">Product:</label>
@@ -56,12 +124,12 @@ $(document).ready(function(){
                                 </select>
                                 <input type="text" name="quan">
                                 <input type="text" name="data">
-                                <input value='add' type="button" name='add' onclick='addElem(this)' >
                                 <input value='delete' type="button" name='delete' onclick='deleteElem(this)' >
                             </div>
                         </div>
                     </div>
                     <input id='goodsSubmit' type="submit" value="submit">
+                    <input value='add' type="button" name='add' onclick='addElem(this)' >
                 </form>
             </div>
         </div>
