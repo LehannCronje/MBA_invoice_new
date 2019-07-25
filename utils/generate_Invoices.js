@@ -11,8 +11,8 @@ exports.createDocx = function(data,sup,cust,ba, general,callback){
 
 
     createInvoice1(data,sup,cust,general);
-    createInvoice2(subt,sup,ba,general);
-    createInvoice3(subt,ba,cust,general);
+    createInvoice2(subt.toFixed(2),sup,ba,general);
+    createInvoice3(subt.toFixed(2),ba,cust,general);
    
     callback(true);
 }
@@ -58,21 +58,23 @@ exports.createPDF = function(data, callback){
 
 function createInvoice1(data,sup,cust,general){
     var itemsSubT = 0;
-    var quantity = 1;
+    var total = 0;
     var invoice_items = [];
     for(var i=0; i<data.length;i++){
         invoice_items[i] = [{
                 pDescription: data[i][1],
                 pCode: data[i][0],
                 pQuan:data[i][2],
-                pPrice: (data[i][3]) * .85,
-                pTotal: (data[i][3] * data[i][2]) * .85
+                pPrice: ((data[i][3]) * .85).toFixed(2),
+                pTotal: ((data[i][3] * data[i][2]) * .85).toFixed(2)
             },
         ];
         itemsSubT = itemsSubT + (data[i][3] * data[i][2]);
     }
     setSubT(itemsSubT);
-    itemsSubT = itemsSubT * .85;
+    total = (itemsSubT * .85)  + parseInt(general.shipHan, 10) + parseInt(general.vat, 10) - parseInt(general.discount, 10)
+    
+    itemsSubT = (itemsSubT * .85).toFixed(2);
     // console.log(data);
     // console.log(invoice_items);
     var content = fs
@@ -104,11 +106,11 @@ function createInvoice1(data,sup,cust,general){
         cEmail: cust.Pers_Email,
         items: invoice_items,
         subT: itemsSubT,
-        vat:general.vat,
-        shipHan:general.shipHan,
-        disc:general.discount,
+        vat:parseInt(general.vat, 10).toFixed(2),
+        shipHan:parseInt(general.shipHan, 10).toFixed(2),
+        disc:parseInt(general.discount, 10).toFixed(2),
         weight: general.weight,
-        total:itemsSubT,
+        total:total,
         footnote:sup.InvoiceFootNote,
         bankName: sup.Bank_Name,
         ibanAccNum:sup.Bank_IBAN_AccNumber,
@@ -158,7 +160,7 @@ doc.setData({
     date: general.supInvDate,
     custAccNo: general.custAccNum,
     terms:'',
-    rName: cust.Cust_Name,
+    rName: cust.BA_Name,
     rAddressNum:cust.Addr_Number,
     rStreet:cust.Addr_Street,
     rCity: cust.Addr_City,
@@ -175,9 +177,9 @@ doc.setData({
     invNo: general.supInvNum,
     custAcc:general.custAccNum,
     subT: data,
-    vat:general.vat,
-    shipHan:general.shipHan,
-    disc:general.discount,
+    vat:'0.00',
+    shipHan:'0.00',
+    disc:'0.00',
     total:data,
     footnote:sup.invoiceNote,
     bankName: sup.Bank_Name,
@@ -242,9 +244,9 @@ doc.setData({
     pTotal: data,
     ordering: '(Incl. registration and management of Ferari Contact Club membership)',
     subT: data,
-    vat:general.vat,
-    shipHan:general.shipHan,
-    disc:general.discount,
+    vat:'0.00',
+    shipHan:'0.00',
+    disc:'0.00',
     total:data,
     footnote:sup.invoiceNote
 });

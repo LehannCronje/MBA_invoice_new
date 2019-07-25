@@ -16,7 +16,7 @@ var clientCodes = [
 
 /* GET home page. */
 router.post('/',getSupClientBa,genInvoices,mergeInvoices, (req,res)=>{
-    console.log(req.body);
+    
     res.render('pD');
 });
 
