@@ -118,6 +118,7 @@ function createInvoice1(data,sup,cust,general){
         corBankName:sup.CorBank_Name,
         corIbanAccNum:sup.CorBank_AccNumber,
         corBankSwift:sup.CorBank_SWIFTcode,
+        description: general.description
     });
     try {
         // render the document ie replace the variables

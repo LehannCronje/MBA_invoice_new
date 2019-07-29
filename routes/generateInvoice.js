@@ -37,8 +37,8 @@ function genInvoices(req,res,next){
         vat: req.body.vat,
         discount: req.body.discount,
         shipHan: req.body.shipHan,
-        weight: req.body.weight
-
+        weight: req.body.weight,
+        description: req.body.description
     }
     var new_goods = [];
     if(Array.isArray(object[2])){

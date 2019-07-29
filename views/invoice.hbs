@@ -38,9 +38,9 @@ $(document).ready(function(){
             <div class="form-wrapper">
                 <form id='goodsForm' action="/generateInvoice" method="POST">
                 <label for="">Supplier:</label>
-                <input type="text" name='sup' id="supField" value="{{supD}}" readonly>
+                <input class="clientsupFields" type="text" name='sup' id="supField" value="{{supD}}" readonly>
                 <label for="">Client:</label>
-                <input type="text" name='client' id="clientField" value="{{clientD}}" readonly>
+                <input class="clientsupFields" type="text" name='client' id="clientField" value="{{clientD}}" readonly>
                 <hr>
                 <div class="top-input-form">
                     <h3>General Inputs</h3>
@@ -58,7 +58,7 @@ $(document).ready(function(){
                                 <label for="">Supplier invoice Date</label>
 
                                 </div>
-                                <input type="text" name="supInvDate">
+                                <input type="date" name="supInvDate">
                             </div>
                             <div class="top-input-form-item">
                                 <div>
@@ -111,7 +111,13 @@ $(document).ready(function(){
                                 </div>
                                 <input type="text" name="weight">
                             </div>
+                            <div class="top-input-form-item">
+                                <div>
 
+                                <label for="">Description</label>
+                                </div>
+                                <input type="text" name="description">
+                            </div>
                         </div>
                         </div>
                     </div>
