@@ -3,6 +3,7 @@ var router = express.Router();
 var db = require('../utils/db_config');
 
 router.post('/', getClientSups,(req,res, next) => {
+    
     res.render('chooseClient' , {client: req.client, sup: req.sup});
 });
 

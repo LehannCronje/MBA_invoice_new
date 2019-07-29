@@ -16,7 +16,19 @@ var clientCodes = [
 
 /* GET home page. */
 router.post('/',getSupClientBa,genInvoices,mergeInvoices, (req,res)=>{
-    
+    var cachedObject = [];
+    for(var i=0;i<(req.body.goodsD).length;i++){
+        var goods = (req.body.goodsD)[i];
+        var split = goods.split(",");
+        cachedObject.push({
+            productCode:split[0],
+            productDescription: split[1],
+            quan: (req.body.quan)[i],
+            val: (req.body.data)[i]
+        });
+    }
+    req.session.cahchedForm = cachedObject;
+    console.log(cachedObject);
     res.render('pD');
 });
 
@@ -97,12 +109,13 @@ function getSupClientBa(req,res,next){
     
 }
 function mergeInvoices(req,res,next){
-    const files = [
-        `./public/pdf/invoice1.pdf`,
-        `./public/pdf/invoice2.pdf`,
-        `./public/pdf/invoice3.pdf`
-    ];
-    PDFMerge(files, {output: `./public/pdf/merge.pdf`})
-    .then((buffer) => {return next()});
+    // const files = [
+    //     `./public/pdf/invoice1.pdf`,
+    //     `./public/pdf/invoice2.pdf`,
+    //     `./public/pdf/invoice3.pdf`
+    // ];
+    // PDFMerge(files, {output: `./public/pdf/merge.pdf`})
+    // .then((buffer) => {return next()});
+    return next();
 }
 module.exports = router;
