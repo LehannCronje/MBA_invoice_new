@@ -98,9 +98,7 @@ function genInvoices(req,res,next){
         invoice.createDocx(data,object['1'],object['0'],object['3'],general,() =>{
             // return next();
             invoice.createPDF(12,(data)=>{
-               fs.watchFile("./public/pdf/invoice3.pdf", (curr,prev)=>{
-                    return next();
-                })
+                return next();
             })
         })
     }
@@ -144,5 +142,6 @@ function mergeInvoices(req,res,next){
     .then((buffer) => {return next()}).catch((e)=>{
         console.log(e);
     });
+    // return next()
 }
 module.exports = router;
