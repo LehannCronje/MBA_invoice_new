@@ -18,6 +18,8 @@ $(document).ready(function(){
         $('#item'+i).find('button').attr('id','delete'+i);
         i++;
     }
+
+    
 </script>
 <div id="item" style="display:none;">
     <div class="content">
@@ -51,35 +53,35 @@ $(document).ready(function(){
                                 <div>
                                     <label for="">Supplier invoice number</label>
                                 </div>
-                                <input type="text" name="supInvNum">
+                                <input type="text" name="supInvNum" value={{generalData.supInvNum}}>
                             </div>
                             <div class="top-input-form-item">
                                 <div>
                                 <label for="">Supplier invoice Date</label>
 
                                 </div>
-                                <input type="date" name="supInvDate">
+                                <input type="date" name="supInvDate" value={{generalData.supInvDate}}>
                             </div>
                             <div class="top-input-form-item">
                                 <div>
                                 <label for="">Customer Account Number</label>
 
                                 </div>
-                                <input type="text" name="custAccNum">
+                                <input type="text" name="custAccNum" value={{generalData.custAccNum}}>
                             </div>
                             <div class="top-input-form-item">
                                 <div>
                                 <label for="">Customs Value</label>
 
                                 </div>
-                                <input type="text" name="customsVal">
+                                <input type="text" name="customsVal" value={{generalData.customsVal}}>
                             </div>
                             <div class="top-input-form-item">
                                 <div>
                                 <label for="">Total Duty</label>
 
                                 </div>
-                                <input type="text" name="totalDuty">
+                                <input type="text" name="totalDuty" value={{generalData.totalDuty}}>
                             </div>
                         </div>
                         <div class="col-6">
@@ -88,35 +90,35 @@ $(document).ready(function(){
                                 <label for="">VAT</label>
 
                                 </div>
-                                <input type="text" name="vat">
+                                <input type="text" name="vat" value={{generalData.vat}}>
                             </div>
                             <div class="top-input-form-item">
                                 <div>
                                     
                                 <label for="">Discount</label>
                                 </div>
-                                <input type="text" name="discount">
+                                <input type="text" name="discount" value={{generalData.discount}}>
                             </div>
                             <div class="top-input-form-item">
                                 <div>
 
                                 <label for="">Shipping 	&amp; Handling </label>
                                 </div>
-                                <input type="text" name="shipHan">
+                                <input type="text" name="shipHan" value={{generalData.shipHan}}>
                             </div>
                             <div class="top-input-form-item">
                                 <div>
 
                                 <label for="">Weight</label>
                                 </div>
-                                <input type="text" name="weight">
+                                <input type="text" name="weight" value={{generalData.weight}}>
                             </div>
                             <div class="top-input-form-item">
                                 <div>
 
                                 <label for="">Description</label>
                                 </div>
-                                <input type="text" name="description">
+                                <input type="text" name="description" value={{generalData.description}}>
                             </div>
                         </div>
                         </div>
@@ -129,23 +131,30 @@ $(document).ready(function(){
                             <label for="">Quantity:</label>
                             <label for="">Amount:</label>
                         </div>
-                        <div id="item0">
-                            <div class="content">
-                                <select name="goodsD" id="goodsD">
-                                {{#each goodsD}}
-                                    
-                                    <option value="{{this.ProdCode}},{{this.ProdDescription}}">{{this.ProdDescription}}</option>
-                                {{/each}}
-                                </select>
-                                <input type="text" name="quan">
-                                <input type="text" name="data">
-                                <input value='delete' type="button" name='delete' onclick='deleteElem(this)' >
+                        {{#each cachedData}}
+                            <div id="item{{@index}}">
+                                <div class="content">
+                                    <select name="goodsD" id="goodsD">
+                                    {{#each ../goodsD}}
+                                        {{#equal this.ProdCode ../this.productCode}}
+                                            <option value="{{this.ProdCode}},{{this.ProdDescription}}" selected>{{this.ProdDescription}}</option>
+                                        {{/equal}}
+                                        {{#compare this.ProdCode ../this.productCode operator="!=" }}
+                                            <option value="{{this.ProdCode}},{{this.ProdDescription}}">{{this.ProdDescription}}</option>
+                                        {{/compare}}
+                                    {{/each}}
+                                    </select>
+                                    <input type="text" name="quan" value={{this.quan}}>
+                                    <input type="text" name="data" value={{this.val}}>
+                                    <input value='delete' type="button" name='delete' onclick='deleteElem(this)' >
+                                </div>
                             </div>
-                        </div>
+                        {{/each}}
                     </div>
                     <input id='goodsSubmit' type="submit" value="submit">
                     <input value='add' type="button" name='add' onclick='addElem(this)' >
                 </form>
+                
             </div>
         </div>
     </div>

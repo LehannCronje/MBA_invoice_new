@@ -24,7 +24,9 @@ exports.createPDF = function(data, callback){
         ENVIRONMENT: "NODE", // required
         LAZY_INIT: true      // if set to false the WASM engine will be initialized right now, usefull pre-caching (like e.g. for AWS lambda)
     }).catch( function(e) {
+        console.log('hello');
         console.error(e);
+        
     });
     
     async function convertHelper(document, exportFct) {
@@ -37,22 +39,28 @@ exports.createPDF = function(data, callback){
 
     convertHelper("./invoices/invoice1.docx", "exportPDF").then((arrayBuffer) => {
         fs.writeFileSync("./public/pdf/invoice1.pdf", new Uint8Array(arrayBuffer));
-    }).catch((e) => {
-        console.error(e);
-    });
-    convertHelper("./invoices/invoice2.docx", "exportPDF").then((arrayBuffer) => {
+    }).then(convertHelper("./invoices/invoice2.docx", "exportPDF").then((arrayBuffer) => {
         fs.writeFileSync("./public/pdf/invoice2.pdf", new Uint8Array(arrayBuffer));
-    }).catch((e) => {
-        console.error(e);
-    });
-    convertHelper("./invoices/invoice3.docx", "exportPDF").then((arrayBuffer) => {
+    })).then(convertHelper("./invoices/invoice3.docx", "exportPDF").then((arrayBuffer) => {
         fs.writeFileSync("./public/pdf/invoice3.pdf", new Uint8Array(arrayBuffer));
-    }).catch((e) => {
+    })).then(callback(true)).catch((e) => {
         console.error(e);
     });
-    fs.watchFile("./public/pdf/invoice3.pdf", (curr,prev)=>{
-        callback(true);
-    })
+
+
+    // convertHelper("./invoices/invoice2.docx", "exportPDF").then((arrayBuffer) => {
+    //     fs.writeFileSync("./public/pdf/invoice2.pdf", new Uint8Array(arrayBuffer));
+    // }).catch((e) => {
+    //     console.error(e);
+    // });
+    // convertHelper("./invoices/invoice3.docx", "exportPDF").then((arrayBuffer) => {
+    //     fs.writeFileSync("./public/pdf/invoice3.pdf", new Uint8Array(arrayBuffer));
+    // }).catch((e) => {
+    //     console.error(e);
+    // });
+    // fs.watchFile("./public/pdf/invoice3.pdf", (curr,prev)=>{
+    //     callback(true);
+    // })
     
 };
 
