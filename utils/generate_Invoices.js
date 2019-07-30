@@ -46,21 +46,6 @@ exports.createPDF = function(data, callback){
     })).then(callback(true)).catch((e) => {
         console.error(e);
     });
-
-
-    // convertHelper("./invoices/invoice2.docx", "exportPDF").then((arrayBuffer) => {
-    //     fs.writeFileSync("./public/pdf/invoice2.pdf", new Uint8Array(arrayBuffer));
-    // }).catch((e) => {
-    //     console.error(e);
-    // });
-    // convertHelper("./invoices/invoice3.docx", "exportPDF").then((arrayBuffer) => {
-    //     fs.writeFileSync("./public/pdf/invoice3.pdf", new Uint8Array(arrayBuffer));
-    // }).catch((e) => {
-    //     console.error(e);
-    // });
-    // fs.watchFile("./public/pdf/invoice3.pdf", (curr,prev)=>{
-    //     callback(true);
-    // })
     
 };
 

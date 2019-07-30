@@ -3,6 +3,7 @@ var router = express.Router();
 var invoice = require('../utils/generate_Invoices');
 var db = require('../utils/db_config');
 var database = new db();
+var fs = require('fs');
 const session = require('express-session');
 
 const PDFMerge = require('pdf-merge');
@@ -98,7 +99,8 @@ function genInvoices(req,res,next){
         invoice.createDocx(data,object['1'],object['0'],object['3'],general,() =>{
             // return next();
             invoice.createPDF(12,(data)=>{
-                return next();
+                setTimeout(function(){ return next(); }, 5000);
+                
             })
         })
     }
@@ -142,6 +144,5 @@ function mergeInvoices(req,res,next){
     .then((buffer) => {return next()}).catch((e)=>{
         console.log(e);
     });
-    // return next()
 }
 module.exports = router;

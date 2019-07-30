@@ -13,6 +13,7 @@ var chooseClientRouter = require('./routes/chooseClient');
 var invoiceRouter = require('./routes/invoice');
 var previewDownloadRouter = require('./routes/previewDownload');
 var download = require('./routes/download');
+var addProduct = require('./routes/addProduct');
 
 var app = express();
 //setup session
@@ -83,6 +84,7 @@ app.use('/chooseClient', chooseClientRouter);
 app.use('/invoice', invoiceRouter);
 app.use('/previewDownload', previewDownloadRouter);
 app.use('/download', download);
+app.use('/addProduct', addProduct);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
