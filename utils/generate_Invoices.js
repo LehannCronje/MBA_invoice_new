@@ -65,7 +65,12 @@ function createInvoice1(data,sup,cust,general){
         itemsSubT = itemsSubT + (data[i][3] * data[i][2]);
     }
     setSubT(itemsSubT);
-    total = (itemsSubT * .85)  + parseInt(general.shipHan, 10) + parseInt(general.vat, 10) - parseInt(general.discount, 10)
+    total = (itemsSubT * .85);
+    total = total + Number(general.shipHan);
+    total = total + Number(general.vat);
+    total = total + Number(general.discount);
+    total.toFixed(2);
+    // total = (itemsSubT * .85)  + parseInt(general.shipHan, 10) + parseInt(general.vat, 10) - parseInt(general.discount, 10)
     
     itemsSubT = (itemsSubT * .85).toFixed(2);
     // console.log(data);

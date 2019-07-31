@@ -5,6 +5,19 @@ html, body{
     background-color: rgba(54, 69, 79, 0.1);
     // background-image: linear-gradient(to bottom left, white, rgb(51,122,183));
 }
+.top-nav{
+    display:flex;
+    input[type=submit]{
+        background-color:rgb(51,122,183);
+        color:white;
+        font-weight:600;
+        border:none;
+        text-transform: uppercase;
+    }
+    .logout{
+        margin-left:auto;
+    }
+}
 
 .login-container{
     text-align: center;
@@ -87,12 +100,27 @@ html, body{
                 margin-right:0px;
             }
         }
+        a{
+            background-color:rgb(51,122,183);
+            color:white;
+            font-weight:600;
+            border:none;
+            text-transform: uppercase;
+            margin:10px 0px;
+        }
+        .formElementContainer{
+            display:inline-block;
+            label{
+                display: block;
+                text-align: left;
+            }
+        }
+        
     }
     .preview-wrapper{
         button{
             width:100%;
             display: inline-block;
-            padding:10px;
             margin:10px 0px;
             background-color:rgb(51,122,183);
             color:white;
@@ -148,4 +176,22 @@ html, body{
 
 .clientsupFields{
     width:300px;
+}
+#modalLoginForm{
+    label{
+        margin:10px 0px;
+    }
+    input{
+        width:100%;
+        padding:6px;
+        border:solid 1px rgb(207, 207, 207);
+    }
+    input[type=submit]{
+        background-color:rgb(51,122,183);
+        color:white;
+        font-weight:600;
+        border:none;
+        text-transform: uppercase;
+        width:250px;
+    }
 }

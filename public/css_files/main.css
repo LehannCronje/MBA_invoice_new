@@ -4,6 +4,20 @@ html, body {
   min-height: 100vh;
   background-color: rgba(54, 69, 79, 0.1); }
 
+.top-nav {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+  .top-nav input[type=submit] {
+    background-color: #337ab7;
+    color: white;
+    font-weight: 600;
+    border: none;
+    text-transform: uppercase; }
+  .top-nav .logout {
+    margin-left: auto; }
+
 .login-container {
   text-align: center; }
   .login-container .login-wrapper {
@@ -73,10 +87,21 @@ html, body {
         margin-right: 270px; }
       .login-container .invoice-wrapper .labels label:last-child {
         margin-right: 0px; }
+    .login-container .invoice-wrapper a {
+      background-color: #337ab7;
+      color: white;
+      font-weight: 600;
+      border: none;
+      text-transform: uppercase;
+      margin: 10px 0px; }
+    .login-container .invoice-wrapper .formElementContainer {
+      display: inline-block; }
+      .login-container .invoice-wrapper .formElementContainer label {
+        display: block;
+        text-align: left; }
   .login-container .preview-wrapper button {
     width: 100%;
     display: inline-block;
-    padding: 10px;
     margin: 10px 0px;
     background-color: #337ab7;
     color: white;
@@ -128,3 +153,19 @@ html, body {
 
 .clientsupFields {
   width: 300px; }
+
+#modalLoginForm label {
+  margin: 10px 0px; }
+
+#modalLoginForm input {
+  width: 100%;
+  padding: 6px;
+  border: solid 1px #cfcfcf; }
+
+#modalLoginForm input[type=submit] {
+  background-color: #337ab7;
+  color: white;
+  font-weight: 600;
+  border: none;
+  text-transform: uppercase;
+  width: 250px; }

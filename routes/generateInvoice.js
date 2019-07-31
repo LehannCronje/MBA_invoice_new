@@ -33,28 +33,28 @@ function genInvoices(req,res,next){
             req.session.productsChosen = true;
             var cachedObject = [];
 
-            if(Array.isArray(req.body.goodsD)){
-                for(var i=0;i<(req.body.goodsD).length;i++){
-                    var goods = (req.body.goodsD)[i];
-                    var split = goods.split(",");
-                    cachedObject.push({
-                        productCode:split[0],
-                        productDescription: split[1],
-                        quan: (req.body.quan)[i],
-                        val: (req.body.data)[i],
-                    });
-                }
-                req.session.cahchedForm = cachedObject;
-            }else{
-                var goods = (req.body.goodsD);
-                    var split = goods.split(",");
-                    cachedObject.push({
-                        productCode:split[0],
-                        productDescription: split[1],
-                        quan: (req.body.quan)[0],
-                        val: (req.body.data)[0],
-                    });
-            }
+            // if(Array.isArray(req.body.goodsD)){
+            //     for(var i=0;i<(req.body.goodsD).length;i++){
+            //         var goods = (req.body.goodsD)[i];
+            //         var split = goods.split(",");
+            //         cachedObject.push({
+            //             productCode:split[0],
+            //             productDescription: split[1],
+            //             quan: (req.body.quan)[i],
+            //             val: (req.body.data)[i],
+            //         });
+            //     }
+            //     req.session.cahchedForm = cachedObject;
+            // }else{
+            //     var goods = (req.body.goodsD);
+            //         var split = goods.split(",");
+            //         cachedObject.push({
+            //             productCode:split[0],
+            //             productDescription: split[1],
+            //             quan: req.body.quan,
+            //             val: req.body.data,
+            //         });
+            // }
 
             //invoice data
             object[0] = req.client[0];
@@ -83,11 +83,25 @@ function genInvoices(req,res,next){
                 for(var i=0;i<object[2].length;i++){
                     var split = object[2][i].split(',');
                     new_goods.push([split[0],split[1],object[4][i],req.body.data[i]]);
+                    cachedObject.push({
+                        productCode:split[0],
+                        productDescription: split[1],
+                        quan: object[4][i],
+                        val: req.body.data[i],
+                    });
                 }
+                req.session.cahchedForm = cachedObject;
                 resolve(new_goods);
             }else{
                 var split = object[2].split(',');
                 new_goods.push([split[0],split[1],object[4],req.body.data]);
+                cachedObject.push({
+                    productCode:split[0],
+                    productDescription: split[1],
+                    quan: object[4],
+                    val: req.body.data,
+                });
+                req.session.cahchedForm = cachedObject;
                 resolve(new_goods);
             }
          })
@@ -99,7 +113,7 @@ function genInvoices(req,res,next){
         invoice.createDocx(data,object['1'],object['0'],object['3'],general,() =>{
             // return next();
             invoice.createPDF(12,(data)=>{
-                setTimeout(function(){ return next(); }, 5000);
+                setTimeout(function(){ return next(); }, 7000);
                 
             })
         })

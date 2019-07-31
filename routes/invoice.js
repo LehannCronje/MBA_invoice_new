@@ -13,13 +13,19 @@ router.post('/', getProducts,renderInvoice);
 
 function getProducts(req,res,next){
 
-    var sql = 'SELECT * FROM Product WHERE SupplierID=1001';
     
     if(!req.session.clientSupChosen){
         req.client = req.body.client;
         req.sup = req.body.sup;
-        req.session.sup = req.body.sup;
-        req.session.client = req.body.client;
+        clientSplit = req.client.split(',');
+        supSplit = req.sup.split(',');
+        req.session.supID = supSplit[0];
+        req.session.clientID = clientSplit[0];
+        req.session.sup = supSplit[1];
+        req.session.client = clientSplit[1];
+        var sql = `SELECT * FROM Product WHERE SupplierID=${req.session.supID}`;
+    }else{
+        var sql = `SELECT * FROM Product WHERE SupplierID=${req.session.supID}`;
     }
     if(!req.session.generalData){
         req.session.general = {

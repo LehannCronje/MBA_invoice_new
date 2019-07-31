@@ -20,6 +20,15 @@
 
     
 </script>
+<div class="container-fluid top-nav">
+    <form class='back' action="/chooseClient" method="post">
+        <input class="btn btn-default btn-rounded mb-4 waves-effect waves-light" type="submit" value="Back">
+    </form>
+    <form class='logout' action="/logout" method="post">
+        <input class="btn btn-default btn-rounded mb-4 waves-effect waves-light" type="submit" value="Logout">
+    </form>
+</div>
+
 <div id="item" style="display:none;">
     <div class="content">
         <select name="goodsD" id="goodsD">
@@ -44,7 +53,7 @@
                 <input class="clientsupFields" type="text" name='client' id="clientField" value="{{clientD}}" readonly>
                 <hr>
                 <div class="top-input-form">
-                    <h3>General Inputs</h3>
+                    <h3>General Input Values</h3>
                     <div class="row">
                         <div class="col-6">
 
@@ -122,37 +131,43 @@
                         </div>
                         </div>
                     </div>
-                <hr>
+                
+                <hr style="padding-top:5px;">
                 <h3>Choose Products</h3>
                 <a href="" id="addProduct" class="btn btn-default btn-rounded mb-4 waves-effect waves-light" data-toggle="modal" data-target="#modalLoginForm">add product</a>
+                <input id="addField" class="btn btn-default btn-rounded mb-4 waves-effect waves-light" value='add field' type="button" name='add' onclick='addElem(this)' >
                     <div class="goods">
-                        <div class="labels">
-                            <label for="">Product:</label>
-                            <label for="">Quantity:</label>
-                            <label for="">Amount:</label>
-                        </div>
                         {{#each cachedData}}
                             <div id="item{{@index}}">
                                 <div class="content">
-                                    <select name="goodsD" id="goodsD">
-                                    {{#each ../goodsD}}
-                                        {{#equal this.ProdCode ../this.productCode}}
-                                            <option value="{{this.ProdCode}},{{this.ProdDescription}}" selected>{{this.ProdDescription}}</option>
-                                        {{/equal}}
-                                        {{#compare this.ProdCode ../this.productCode operator="!=" }}
-                                            <option value="{{this.ProdCode}},{{this.ProdDescription}}">{{this.ProdDescription}}</option>
-                                        {{/compare}}
-                                    {{/each}}
-                                    </select>
-                                    <input type="text" name="quan" value={{this.quan}}>
-                                    <input type="text" name="data" value={{this.val}}>
+                                    <div class="formElementContainer">
+                                        <label for="">Product:</label>
+                                        <select name="goodsD" id="goodsD">
+                                        {{#each ../goodsD}}
+                                            {{#equal this.ProdCode ../this.productCode}}
+                                                <option value="{{this.ProdCode}},{{this.ProdDescription}}" selected>{{this.ProdDescription}}</option>
+                                            {{/equal}}
+                                            {{#compare this.ProdCode ../this.productCode operator="!=" }}
+                                                <option value="{{this.ProdCode}},{{this.ProdDescription}}">{{this.ProdDescription}}</option>
+                                            {{/compare}}
+                                        {{/each}}
+                                        </select>
+                                    </div>
+                                    <div class="formElementContainer">
+                                        <label for="">Quantity:</label>
+                                        <input type="text" name="quan" value={{this.quan}}>
+                                    </div>
+                                    <div class="formElementContainer">
+                                        <label for="">Amount:</label>
+                                        <input type="text" name="data" value={{this.val}}>
+                                    </div>
                                     <input value='delete' type="button" name='delete' onclick='deleteElem(this)' >
                                 </div>
                             </div>
                         {{/each}}
                     </div>
-                    <input id='goodsSubmit' type="submit" value="submit">
-                    <input value='add' type="button" name='add' onclick='addElem(this)' >
+                    <input id='goodsSubmit' class="btn btn-default btn-rounded mb-4 waves-effect waves-light" type="submit" value="submit">
+                    
                 </form>
                 
             </div>
@@ -175,37 +190,33 @@
             </div>
             <div class="modal-body mx-3">
                 <div class="top-input-form-item">
-                                <div>
-                                    
-                                <label for="">Product Description</label>
-                                </div>
-                                <input type="text" name="discount">
-                            </div>
-                            <div class="top-input-form-item">
-                                <div>
-
-                                <label for="">Product Code </label>
-                                </div>
-                                <input type="text" name="shipHan">
-                            </div>
-                            <div class="top-input-form-item">
-                                <div>
-
-                                <label for="">Weight</label>
-                                </div>
-                                <input type="text" name="weight" >
-                            </div>
-                            <div class="top-input-form-item">
-                                <div>
-
-                                <label for="">Description</label>
-                                </div>
-                                <input type="text" name="description">
-                            </div>
+                    <div>
+                        <label for="">Product Description</label>
+                    </div>
+                    <input type="text" name="discount">
+                </div>
+                <div class="top-input-form-item">
+                    <div>
+                        <label for="">Product Code </label>
+                    </div>
+                    <input type="text" name="shipHan">
+                </div>
+                <div class="top-input-form-item">
+                    <div>
+                        <label for="">Weight</label>
+                    </div>
+                    <input type="text" name="weight" >
+                </div>
+                <div class="top-input-form-item">
+                    <div>
+                        <label for="">Description</label>
+                    </div>
+                    <input type="text" name="description">
+                </div>
 
             </div>
             <div class="modal-footer d-flex justify-content-center">
-                <button class="btn btn-default">Submit</button>
+                <input class="btn btn-default btn-rounded mb-4 waves-effect waves-light" type="submit" value='submit'>
             </div>
         </form>
     </div>
