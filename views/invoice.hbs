@@ -141,7 +141,9 @@
                             <div id="item{{@index}}">
                                 <div class="content">
                                     <div class="formElementContainer">
-                                        <label for="">Product:</label>
+                                        {{#compare @index 0 operator="=="}}
+                                            <label for="">Product:</label>
+                                        {{/compare}}
                                         <select name="goodsD" id="goodsD">
                                         {{#each ../goodsD}}
                                             {{#equal this.ProdCode ../this.productCode}}
@@ -154,11 +156,15 @@
                                         </select>
                                     </div>
                                     <div class="formElementContainer">
-                                        <label for="">Quantity:</label>
+                                        {{#compare @index 0 operator="=="}}
+                                            <label for="">Quantity</label>
+                                        {{/compare}}
                                         <input type="text" name="quan" value={{this.quan}}>
                                     </div>
                                     <div class="formElementContainer">
-                                        <label for="">Amount:</label>
+                                        {{#compare @index 0 operator="=="}}
+                                            <label for="">Amount:</label>
+                                        {{/compare}}
                                         <input type="text" name="data" value={{this.val}}>
                                     </div>
                                     <input value='delete' type="button" name='delete' onclick='deleteElem(this)' >
