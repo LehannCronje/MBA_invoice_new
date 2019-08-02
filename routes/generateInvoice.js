@@ -8,17 +8,15 @@ const session = require('express-session');
 
 const PDFMerge = require('pdf-merge');
 
-var supCodes = [
-    ['Africa',1001],
-];
-
-var clientCodes = [
-    ['Scuderia',1001],
-];
 
 /* GET home page. */
 router.post('/',getSupClientBa,genInvoices,mergeInvoices, (req,res)=>{
-    res.render('pD');
+    
+    if(req.body.addProductChecker == 'false'){
+        res.render('pD');
+    }else{
+        res.redirect(307, '/invoice');
+    }
 });
 
 function genInvoices(req,res,next){
@@ -32,29 +30,6 @@ function genInvoices(req,res,next){
             req.session.clientSupChosen = true;
             req.session.productsChosen = true;
             var cachedObject = [];
-
-            // if(Array.isArray(req.body.goodsD)){
-            //     for(var i=0;i<(req.body.goodsD).length;i++){
-            //         var goods = (req.body.goodsD)[i];
-            //         var split = goods.split(",");
-            //         cachedObject.push({
-            //             productCode:split[0],
-            //             productDescription: split[1],
-            //             quan: (req.body.quan)[i],
-            //             val: (req.body.data)[i],
-            //         });
-            //     }
-            //     req.session.cahchedForm = cachedObject;
-            // }else{
-            //     var goods = (req.body.goodsD);
-            //         var split = goods.split(",");
-            //         cachedObject.push({
-            //             productCode:split[0],
-            //             productDescription: split[1],
-            //             quan: req.body.quan,
-            //             val: req.body.data,
-            //         });
-            // }
 
             //invoice data
             object[0] = req.client[0];
@@ -109,16 +84,28 @@ function genInvoices(req,res,next){
         
     }
     let promise = genDataForInvoices();
-    promise.then( (data)=>{
-        invoice.createDocx(data,object['1'],object['0'],object['3'],general,() =>{
-            // return next();
-            invoice.createPDF(12,(data)=>{
-                setTimeout(function(){ return next(); }, 7000);
-                
+    if(req.body.addProductChecker == 'false'){
+        promise.then( (data)=>{
+            invoice.createDocx(data,object['1'],object['0'],object['3'],general,() =>{
+                // return next();
+                invoice.createPDF(12,(data)=>{
+                    setTimeout(function(){ return next(); }, 7000);
+                    
+                })
             })
-        })
+        });
+    }else{
+        promise.then( (data)=>{
+                    var sql = `INSERT INTO Product 
+            (SupplierID,ProdCode,ProdDescription)
+            VALUES 
+            ('${req.session.supID}','${req.body.addProductDescriptionPlaceholder}','${req.body.addProductCodePlaceholder}');`
+            
+            database.query(sql).then(rows => {
+                return next();
+            });
+        });
     }
-    );
     // promise.then(()=>{
         
     //     return next()
@@ -147,6 +134,8 @@ function getSupClientBa(req,res,next){
     }).catch( err => {
         console.error(err);
     } );
+
+    
 }
 function mergeInvoices(req,res,next){
     const files = [
@@ -158,5 +147,6 @@ function mergeInvoices(req,res,next){
     .then((buffer) => {return next()}).catch((e)=>{
         console.log(e);
     });
+    return next();
 }
 module.exports = router;

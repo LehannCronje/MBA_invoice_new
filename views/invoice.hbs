@@ -1,5 +1,15 @@
 <script>
-
+    $( document ).ready(function() {
+    $('#addProductSubmit').click(function(){
+        var newDiscounttxt = $('#newDiscoutTxt').val();
+        var newShipHantxt = $('#newShipHanTxt').val();
+        $('#addProductCheckerID').val('true');
+        $('#addProductDescriptionPlaceholderID').val(newDiscounttxt);
+        $('#addProductCodePlaceholderID').val(newShipHantxt);
+        $('#goodsForm').submit();
+    });
+    });
+    
 </script>
 <script>
     i=1;
@@ -8,7 +18,6 @@
     }
     function addElem(elem){
         var id = $(elem).parent().parent().attr('id');
-        {{!-- $('<div id=item'+(i)+'></div>').append('.goods'); --}}
         $('.goods').append('<div id=item'+(i)+'></div>')
         $('#item').find(".content").clone().appendTo('#item'+i);
         //$('#item'+i).find('input').attr('name','data'+i);
@@ -33,7 +42,7 @@
     <div class="content">
         <select name="goodsD" id="goodsD">
         {{#each goodsD}}
-             <option value="{{this.ProdCode}},{{this.ProdDescription}}">{{this.ProdDescription}}</option>
+             <option value="{{this.ProdCode}},{{this.ProdDescription}},{{this.ProductID}}">{{this.ProdDescription}}</option>
         {{/each}}
         </select>
         <input type="text" name="quan">
@@ -47,6 +56,9 @@
             <h1>Build Invoice</h1>
             <div class="form-wrapper">
                 <form id='goodsForm' action="/generateInvoice" method="POST">
+                <input id="addProductCheckerID" type="text" name="addProductChecker" style='display:none' value="false">
+                <input id="addProductDescriptionPlaceholderID" type="text" name="addProductDescriptionPlaceholder" style="display:none">
+                <input id="addProductCodePlaceholderID" type="text" name="addProductCodePlaceholder" style="display:none">
                 <label for="">Supplier:</label>
                 <input class="clientsupFields" type="text" name='sup' id="supField" value="{{supD}}" readonly>
                 <label for="">Client:</label>
@@ -126,7 +138,7 @@
 
                                 <label for="">Description</label>
                                 </div>
-                                <input type="text" name="description" value={{generalData.description}}>
+                                <input type="text" name="description" value='{{generalData.description}}'>
                             </div>
                         </div>
                         </div>
@@ -147,10 +159,10 @@
                                         <select name="goodsD" id="goodsD">
                                         {{#each ../goodsD}}
                                             {{#equal this.ProdCode ../this.productCode}}
-                                                <option value="{{this.ProdCode}},{{this.ProdDescription}}" selected>{{this.ProdDescription}}</option>
+                                                <option value="{{this.ProdCode}},{{this.ProdDescription}},{{this.ProductID}}" selected>{{this.ProdDescription}}</option>
                                             {{/equal}}
                                             {{#compare this.ProdCode ../this.productCode operator="!=" }}
-                                                <option value="{{this.ProdCode}},{{this.ProdDescription}}">{{this.ProdDescription}}</option>
+                                                <option value="{{this.ProdCode}},{{this.ProdDescription}},{{this.ProductID}}">{{this.ProdDescription}}</option>
                                             {{/compare}}
                                         {{/each}}
                                         </select>
@@ -185,8 +197,7 @@
 <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <form action="/addProduct" method="post">
+    <div class="modal-content">        
         <label for=""></label>
             <div class="modal-header text-center">
                 <h4 class="modal-title w-100 font-weight-bold">Add Product</h4>
@@ -199,32 +210,18 @@
                     <div>
                         <label for="">Product Description</label>
                     </div>
-                    <input type="text" name="discount">
+                    <input id="newDiscoutTxt" type="text" name="newDiscount">
                 </div>
                 <div class="top-input-form-item">
                     <div>
                         <label for="">Product Code </label>
                     </div>
-                    <input type="text" name="shipHan">
+                    <input id="newShipHanTxt" type="text" name="newShipHan">
                 </div>
-                <div class="top-input-form-item">
-                    <div>
-                        <label for="">Weight</label>
-                    </div>
-                    <input type="text" name="weight" >
-                </div>
-                <div class="top-input-form-item">
-                    <div>
-                        <label for="">Description</label>
-                    </div>
-                    <input type="text" name="description">
-                </div>
-
             </div>
             <div class="modal-footer d-flex justify-content-center">
-                <input class="btn btn-default btn-rounded mb-4 waves-effect waves-light" type="submit" value='submit'>
+                <input id="addProductSubmit" idclass="btn btn-default btn-rounded mb-4 waves-effect waves-light" type="submit" value='submit'>
             </div>
-        </form>
     </div>
   </div>
 </div>

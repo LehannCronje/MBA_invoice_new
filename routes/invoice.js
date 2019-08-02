@@ -41,7 +41,7 @@ function getProducts(req,res,next){
             description: ''
         }
     }
-    console.log(req.session.clientSupChosen);
+
     database.query(sql).then(rows => {
         req.goodsData = rows;
         req.session.goodsData = rows;
