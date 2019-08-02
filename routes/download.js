@@ -13,7 +13,7 @@ router.post('/',addInvoiceDB,function(req, res, next) {
         {path: './public/pdf/invoice2.pdf', name: 'invoice2.pdf'},
         {path: './public/pdf/invoice3.pdf', name: 'invoice3.pdf'},
     ]);
-    res.render('pD');
+    // res.render('pD');
 });
 
 function addInvoiceDB(req, res,next){
@@ -52,6 +52,18 @@ function addInvoiceDB(req, res,next){
         // console.log(rows);
          
     }).then(rows => {
+        // function buildQuery() {
+        //     return new Promise( ( resolve, reject ) => {
+                
+        //         resolve(productString);
+        //     } );
+        // }
+        // console.log(productString);
+        // let promise = buildQuery();
+        // promise.then((data)=>{
+        //     console.log(data);
+        //     return data; 
+        // })
         if(Array.isArray(req.session.goodsData)){
             for(var i=0;i<req.session.goodsData.length;i++){
                 var split = req.session.goodsData[i].split(',');
@@ -63,7 +75,7 @@ function addInvoiceDB(req, res,next){
             productIDs = split[2];
             productString += `('${rows[0].OrgInvSummaryID}','${split[2]}','${req.session.cahchedForm[0].val}','${req.session.cahchedForm[0].quan}','${req.session.clientID}','1001','${req.session.supID}')`
         }
-        return productString; 
+        return productString;
     }).then(rows => {
         var sql = `insert into DB_MBA2.OriginalInvoice (OrgInvSummaryID,OrgInv_ProductID,OrgInv_Price,OrgInv_Quantity,CustomerID,BA_ID,SupplierID) values ${rows};`
         console.log(sql);
