@@ -68,7 +68,7 @@ function addInvoiceDB(req, res,next){
             for(var i=0;i<req.session.goodsData.length;i++){
                 var split = req.session.goodsData[i].split(',');
                 productIDs[i] = split[2];
-                if(req.session.goodsData.length-1 == i){
+                if(i === (req.session.goodsData.length)-1){
                     productString += `('${rows[0].OrgInvSummaryID}','${split[2]}','${req.session.cahchedForm[i].val}','${req.session.cahchedForm[i].quan}','${req.session.clientID}','1001','${req.session.supID}')`
                 }else{
                     productString += `('${rows[0].OrgInvSummaryID}','${split[2]}','${req.session.cahchedForm[i].val}','${req.session.cahchedForm[i].quan}','${req.session.clientID}','1001','${req.session.supID}'),`
