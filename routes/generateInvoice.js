@@ -138,14 +138,19 @@ function getSupClientBa(req,res,next){
     
 }
 function mergeInvoices(req,res,next){
-    const files = [
-        `./public/pdf/invoice1.pdf`,
-        `./public/pdf/invoice2.pdf`,
-        `./public/pdf/invoice3.pdf`
-    ];
-    PDFMerge(files, {output: `./public/pdf/merge.pdf`})
-    .then((buffer) => {return next()}).catch((e)=>{
-        console.log(e);
-    });
+    
+    if(req.body.addProductChecker == 'false'){
+        const files = [
+            `./public/pdf/invoice1.pdf`,
+            `./public/pdf/invoice2.pdf`,
+            `./public/pdf/invoice3.pdf`
+        ];
+        PDFMerge(files, {output: `./public/pdf/merge.pdf`})
+        .then((buffer) => {return next()}).catch((e)=>{
+            console.log(e);
+        });
+    }else{
+        return next();
+    }
 }
 module.exports = router;
