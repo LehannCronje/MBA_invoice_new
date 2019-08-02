@@ -47,7 +47,7 @@ function addInvoiceDB(req, res,next){
     console.log(sql);
         return database.query(sql);
     }).then(rows =>{
-        var sql = `select OrgInvSummaryID from DB_MBA2.originalinvoicesummary ORDER BY OrgInvSummaryID DESC LIMIT 1;`;
+        var sql = `select OrgInvSummaryID from DB_MBA2.OriginalInvoiceSummary ORDER BY OrgInvSummaryID DESC LIMIT 1;`;
         return database.query(sql);
         // console.log(rows);
          
