@@ -147,6 +147,5 @@ function mergeInvoices(req,res,next){
     .then((buffer) => {return next()}).catch((e)=>{
         console.log(e);
     });
-    return next();
 }
 module.exports = router;
