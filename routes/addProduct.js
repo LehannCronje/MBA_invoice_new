@@ -12,7 +12,7 @@ function addProductDB(req,res,next){
     var sql = `INSERT INTO Product 
     (SupplierID,ProdCode,ProdDescription)
     VALUES 
-    ('${req.session.supID}','${req.body.newShipHan}','${req.body.newDiscount}');`
+    ('${req.session.supID}','${req.body.newDiscount}','${req.body.newShipHan}');`
     
     database.query(sql).then(rows => {
         return next();
