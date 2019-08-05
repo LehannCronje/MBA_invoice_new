@@ -42,9 +42,9 @@ function addInvoiceDB(req, res,next){
         var sql = `insert into DB_MBA2.OriginalInvoiceSummary
     (OrgInv_InvoiceDate,OrgInv_InvoiceNumber,OrgInv_CustomerNumber,OrgInvSumm_TotCustomsValue,OrgInvSumm_DutyValue,OrgInvSumm_VAT,OrgInvSumm_Discount,OrgInvSumm_ShipHandling,OrgInvSumm_Weight,OrgInvSumm_Description,BAI_InvoiceNumber )
     values 
-    ('${object[1].supInvDate}','${object[1].supInvNum}','${object[1].custAccNum}','${object[1].customsVal}','${object[1].totalDuty}','${object[1].vat}','${object[1].discount}','${object[1].shipHan}','${object[1].weight}','${object[1].description}','DS${Number(rows[0].BAI_InvoiceNumber.substring(2))+1}')
+    ('${object[1].supInvDate}','${object[1].supInvNum}','${object[1].custAccNum}','${object[1].customsVal}','${object[1].totalDuty}','${object[1].vat}','${object[1].discount}','${object[1].shipHan}','${object[1].weight}','${object[1].description}','DS${Number(rows[rows.length-1].BAI_InvoiceNumber.substring(2))+1}')
     ;`
-    console.log(sql);
+    console.log(rows);
         return database.query(sql);
     }).then(rows =>{
         var sql = `select OrgInvSummaryID from DB_MBA2.OriginalInvoiceSummary ORDER BY OrgInvSummaryID DESC LIMIT 1;`;
@@ -82,7 +82,6 @@ function addInvoiceDB(req, res,next){
         return productString;
     }).then(rows => {
         var sql = `insert into DB_MBA2.OriginalInvoice (OrgInvSummaryID,OrgInv_ProductID,OrgInv_Price,OrgInv_Quantity,CustomerID,BA_ID,SupplierID) values ${rows};`
-        console.log(sql);
         return database.query(sql);
     }).then( rows =>{
         return next();
