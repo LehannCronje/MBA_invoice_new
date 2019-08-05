@@ -51,6 +51,18 @@ html, body {
     -webkit-box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.2), 0 2px 30px 0 rgba(0, 0, 0, 0.35);
             box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.2), 0 2px 30px 0 rgba(0, 0, 0, 0.35);
     margin-bottom: 50px; }
+    .login-container .invoice-wrapper button {
+      width: 100%;
+      display: inline-block;
+      margin: 10px 0px;
+      background-color: #337ab7;
+      color: white;
+      font-weight: 600;
+      border: none;
+      text-transform: uppercase; }
+      .login-container .invoice-wrapper button a {
+        color: white;
+        text-decoration: none; }
     .login-container .invoice-wrapper input {
       padding: 6px;
       margin: 10px 0px;
@@ -62,6 +74,8 @@ html, body {
       border: none;
       text-transform: uppercase;
       width: 250px; }
+    .login-container .invoice-wrapper .new-transaction {
+      width: 100% !important; }
     .login-container .invoice-wrapper input[type=button] {
       background-color: #337ab7;
       color: white;

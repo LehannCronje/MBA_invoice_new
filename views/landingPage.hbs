@@ -1,3 +1,8 @@
+<script>
+    function construction(){
+        alert('This section is still under construction');
+    }
+</script>
 <div class="container-fluid top-nav">
     <form class='logout' action="/logout" method="post">
         <input class="btn btn-default btn-rounded mb-4 waves-effect waves-light" type="submit" value="Logout">
@@ -8,14 +13,14 @@
         <div class="invoice-wrapper col-12">
             <h1>Datasmart Solutions</h1>
             <div class="form-wrapper">
-                <form action="">
-                    <input type="submit" value="Reports" class="btn btn-default btn-rounded mb-4 waves-effect waves-light">
-                </form>
-                <form action="">
-                    <input type="submit" value="User Admin" class="btn btn-default btn-rounded mb-4 waves-effect waves-light">
-                </form>
+                <div>
+                    <button  onclick='construction()' class="btn btn-default btn-rounded mb-4 waves-effect waves-light">Reports</button>
+                </div>
+                <div>
+                    <button onclick='construction()'  class="btn btn-default btn-rounded mb-4 waves-effect waves-light">User Admin</button>
+                </div>
                 <form action="/chooseClient" method="post">
-                    <input class="btn btn-default btn-rounded mb-4 waves-effect waves-light" type="submit" value="New Transaction">
+                    <input class="btn btn-default btn-rounded mb-4 new-transaction" type="submit" value="New Transaction">
                 </form>
             </div>
         </div>
