@@ -39,11 +39,19 @@ function addInvoiceDB(req, res,next){
     ;
     `
     database.query(sql3).then(rows => {
-        var sql = `insert into DB_MBA2.OriginalInvoiceSummary
-    (OrgInv_InvoiceDate,OrgInv_InvoiceNumber,OrgInv_CustomerNumber,OrgInvSumm_TotCustomsValue,OrgInvSumm_DutyValue,OrgInvSumm_VAT,OrgInvSumm_Discount,OrgInvSumm_ShipHandling,OrgInvSumm_Weight,OrgInvSumm_Description,BAI_InvoiceNumber )
-    values 
-    ('${object[1].supInvDate}','${object[1].supInvNum}','${object[1].custAccNum}','${object[1].customsVal}','${object[1].totalDuty}','${object[1].vat}','${object[1].discount}','${object[1].shipHan}','${object[1].weight}','${object[1].description}','DS${Number(rows[rows.length-1].BAI_InvoiceNumber.substring(2))+1}')
-    ;`
+        if(rows.length == 0){
+            var sql = `insert into DB_MBA2.OriginalInvoiceSummary
+        (OrgInv_InvoiceDate,OrgInv_InvoiceNumber,OrgInv_CustomerNumber,OrgInvSumm_TotCustomsValue,OrgInvSumm_DutyValue,OrgInvSumm_VAT,OrgInvSumm_Discount,OrgInvSumm_ShipHandling,OrgInvSumm_Weight,OrgInvSumm_Description,BAI_InvoiceNumber )
+        values 
+        ('${object[1].supInvDate}','${object[1].supInvNum}','${object[1].custAccNum}','${object[1].customsVal}','${object[1].totalDuty}','${object[1].vat}','${object[1].discount}','${object[1].shipHan}','${object[1].weight}','${object[1].description}','DS1008')
+        ;`
+        }else{
+            var sql = `insert into DB_MBA2.OriginalInvoiceSummary
+        (OrgInv_InvoiceDate,OrgInv_InvoiceNumber,OrgInv_CustomerNumber,OrgInvSumm_TotCustomsValue,OrgInvSumm_DutyValue,OrgInvSumm_VAT,OrgInvSumm_Discount,OrgInvSumm_ShipHandling,OrgInvSumm_Weight,OrgInvSumm_Description,BAI_InvoiceNumber )
+        values 
+        ('${object[1].supInvDate}','${object[1].supInvNum}','${object[1].custAccNum}','${object[1].customsVal}','${object[1].totalDuty}','${object[1].vat}','${object[1].discount}','${object[1].shipHan}','${object[1].weight}','${object[1].description}','DS${Number(rows[rows.length-1].BAI_InvoiceNumber.substring(2))+1}')
+        ;`
+        }
     console.log(rows);
         return database.query(sql);
     }).then(rows =>{
