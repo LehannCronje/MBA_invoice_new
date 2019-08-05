@@ -15,6 +15,7 @@ var previewDownloadRouter = require('./routes/previewDownload');
 var download = require('./routes/download');
 var addProduct = require('./routes/addProduct');
 var logout = require('./routes/logout');
+var landingPage = require('./routes/landingPage');
 
 var app = express();
 //setup session
@@ -87,6 +88,7 @@ app.use('/previewDownload', previewDownloadRouter);
 app.use('/download', download);
 app.use('/addProduct', addProduct);
 app.use('/logout', logout);
+app.use('/landingPage', landingPage);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
