@@ -1,0 +1,30 @@
+<script>
+
+$(document).ready(() => {
+    $('#getReport').click(() => {
+        $.ajax({
+        url: 'reportsData/',
+        type: 'GET',
+        dataType: 'json',
+        success: (data) => {
+                
+                $.each(data, (i,item)=>{
+                    console.log(i+" "+item.job);
+                    $('<tr>').append(
+                        $('<td>').text(item.job)
+                    ).appendTo('#reports-table');
+                });
+            }
+        })
+    })
+})
+
+   
+</script>
+
+<button id="getReport">getReport</button>
+<table id="reports-table">
+    <tr>
+        <th>item</th>
+    </tr>
+</table>

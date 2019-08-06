@@ -90,6 +90,18 @@ app.use('/addProduct', addProduct);
 app.use('/logout', logout);
 app.use('/landingPage', landingPage);
 
+const fakeDatabase = {
+  'philip' : {job: 'professor', pet: 'cat.jpg'},
+  'John' : {job: 'student', pet: 'dog.jpg'},
+  'Carol' : {job: 'engineer', pet: 'bear.jpg'},
+}
+
+app.get('/reportsData', (req,res) => {
+  res.send(fakeDatabase);
+})
+app.get('/reports', (req,res) => {
+  res.render('reports');
+})
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
