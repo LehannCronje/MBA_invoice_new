@@ -16,6 +16,7 @@ var download = require('./routes/download');
 var addProduct = require('./routes/addProduct');
 var logout = require('./routes/logout');
 var landingPage = require('./routes/landingPage');
+var reports = require('./routes/reports');
 
 var app = express();
 //setup session
@@ -89,19 +90,8 @@ app.use('/download', download);
 app.use('/addProduct', addProduct);
 app.use('/logout', logout);
 app.use('/landingPage', landingPage);
+app.use('/reports', reports);
 
-const fakeDatabase = {
-  'philip' : {job: 'professor', pet: 'cat.jpg'},
-  'John' : {job: 'student', pet: 'dog.jpg'},
-  'Carol' : {job: 'engineer', pet: 'bear.jpg'},
-}
-
-app.get('/reportsData', (req,res) => {
-  res.send(fakeDatabase);
-})
-app.get('/reports', (req,res) => {
-  res.render('reports');
-})
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

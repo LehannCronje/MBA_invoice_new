@@ -3,18 +3,29 @@
 $(document).ready(() => {
     $('#getReport').click(() => {
         $.ajax({
-        url: 'reportsData/',
+        url: 'reports/reportsData/',
         type: 'GET',
         dataType: 'json',
         success: (data) => {
-                
-                $.each(data, (i,item)=>{
-                    console.log(i+" "+item.job);
+                console.log(data)
+               var jsonData = data[0][0];
+                    console.log(JSON.stringify(jsonData["Report Name"]));
                     $('<tr>').append(
-                        $('<td>').text(item.job)
+                        $('<td>').text(jsonData["Report Name"]),
+                        $('<td>').text(jsonData["Total number of invoice"]),
+                        $('<td>').text(jsonData['Total Transaction Value (Pro-Forma)']),
+                        $('<td>').text(jsonData['Total Supplier Invoice Amount']),
+                        $('<td>').text(jsonData['Total Buying Agent Invoice Amount']),
+                        $('<td>').text(jsonData['Total Duties before savings']),
+                        $('<td>').text(jsonData['Total Duties after savings']),
+                        $('<td>').text(jsonData['Total Savings']),
+                        $('<td>').text(jsonData['20% DHSK Admin']),
+                        $('<td>').text(jsonData['20% DSHK Profit Share']),
+                        $('<td>').text(jsonData['20% Edgepoint']),
+                        $('<td>').text(jsonData['40% Scuderia']),
+                        $('td').text(data),
                     ).appendTo('#reports-table');
-                });
-            }
+            }   
         })
     })
 })
@@ -25,6 +36,18 @@ $(document).ready(() => {
 <button id="getReport">getReport</button>
 <table id="reports-table">
     <tr>
-        <th>item</th>
+        <th>Report data</th>
+        <th>Report Name</th>
+        <th>Report Name</th>
+        <th>Report Name</th>
+        <th>Report Name</th>
+        <th>Report Name</th>
+        <th>Report Name</th>
+        <th>Report Name</th>
+        <th>Report Name</th>
+        <th>Report Name</th>
+        <th>Report Name</th>
+        <th>Report Name</th>
+
     </tr>
 </table>
