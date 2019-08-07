@@ -2,29 +2,21 @@
 
 $(document).ready(() => {
     $('#getReport').click(() => {
+        $('tr').remove();
         $.ajax({
         url: 'reports/reportsData/',
         type: 'GET',
         dataType: 'json',
         success: (data) => {
-                console.log(data)
+                var count = 0;
                var jsonData = data[0][0];
-                    console.log(JSON.stringify(jsonData["Report Name"]));
-                    $('<tr>').append(
-                        $('<td>').text(jsonData["Report Name"]),
-                        $('<td>').text(jsonData["Total number of invoice"]),
-                        $('<td>').text(jsonData['Total Transaction Value (Pro-Forma)']),
-                        $('<td>').text(jsonData['Total Supplier Invoice Amount']),
-                        $('<td>').text(jsonData['Total Buying Agent Invoice Amount']),
-                        $('<td>').text(jsonData['Total Duties before savings']),
-                        $('<td>').text(jsonData['Total Duties after savings']),
-                        $('<td>').text(jsonData['Total Savings']),
-                        $('<td>').text(jsonData['20% DHSK Admin']),
-                        $('<td>').text(jsonData['20% DSHK Profit Share']),
-                        $('<td>').text(jsonData['20% Edgepoint']),
-                        $('<td>').text(jsonData['40% Scuderia']),
-                        $('td').text(data),
-                    ).appendTo('#reports-table');
+               var markup = "<tr><th>Heading</th><th>data</th></tr>"
+               $('tbody').append
+               for(var prop in jsonData){
+                   var markup = "<tr><th>"+prop+"</th><td>"+jsonData[prop]+"</td></tr>"
+                   console.log(count +" "+ jsonData[prop])
+                   $('tbody').append(markup);
+               }
             }   
         })
     })
@@ -32,22 +24,32 @@ $(document).ready(() => {
 
    
 </script>
+<div class="container report-container" style="height:100vh">
+    <button id="getReport">getReport</button>
+    <div class="row reports-row" style="width:100%">
+        <div class="report-content col-6">
+            <div class="row">
+                <div class="col-12">
+                   
+                    <table id="reports-table" class="table table-striped table-responsive-md">
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="report-content col-6">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Reports for the Invoice Summary</h1>
+                    <button id="getReport">getReport</button>
+                    <table id="reports-table" class="table table-striped table-responsive-md">
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<button id="getReport">getReport</button>
-<table id="reports-table">
-    <tr>
-        <th>Report data</th>
-        <th>Report Name</th>
-        <th>Report Name</th>
-        <th>Report Name</th>
-        <th>Report Name</th>
-        <th>Report Name</th>
-        <th>Report Name</th>
-        <th>Report Name</th>
-        <th>Report Name</th>
-        <th>Report Name</th>
-        <th>Report Name</th>
-        <th>Report Name</th>
-
-    </tr>
-</table>

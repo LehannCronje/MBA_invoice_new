@@ -106,10 +106,7 @@ function genInvoices(req,res,next){
             });
         });
     }
-    // promise.then(()=>{
-        
-    //     return next()
-    // })
+    
 
     
     

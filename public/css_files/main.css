@@ -183,3 +183,18 @@ html, body {
   border: none;
   text-transform: uppercase;
   width: 250px; }
+
+.report-container {
+  padding: 0px; }
+  .report-container .reports-row {
+    min-height: 50%;
+    margin: 0px;
+    padding: 15px;
+    background-color: aliceblue;
+    -webkit-box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.2), 0 2px 30px 0 rgba(0, 0, 0, 0.35);
+            box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.2), 0 2px 30px 0 rgba(0, 0, 0, 0.35);
+    border-radius: 5px; }
+
+.report-content {
+  padding: 15px;
+  background-color: white; }
