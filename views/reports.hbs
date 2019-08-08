@@ -2,20 +2,46 @@
 
 $(document).ready(() => {
     $('#getReport').click(() => {
-        $('tr').remove();
+        $('.table-row-1').remove();
         $.ajax({
         url: 'reports/reportsData/',
-        type: 'GET',
+        type: 'post',
+        data: {
+            date1 : $('#report1Date1').val(),
+            date2 : $('#report1Date2').val()
+        },
         dataType: 'json',
-        success: (data) => {
+        success: (data1) => {
+            console.log(data1);
                 var count = 0;
-               var jsonData = data[0][0];
-               var markup = "<tr><th>Heading</th><th>data</th></tr>"
-               $('tbody').append
+               var jsonData = data1[0][0];
+               var markup = "<tr class='table-row-1'><th>Heading</th><th>Data</th></tr>"
+               $('.tbody1').append(markup);
                for(var prop in jsonData){
-                   var markup = "<tr><th>"+prop+"</th><td>"+jsonData[prop]+"</td></tr>"
+                   var markup = "<tr class='table-row-1'><th>"+prop+"</th><td>"+jsonData[prop]+"</td></tr>"
                    console.log(count +" "+ jsonData[prop])
-                   $('tbody').append(markup);
+                   $('.tbody1').append(markup);
+               }
+            }   
+        })
+    })
+    $('#getReport2').click(() => {
+        $('.table-row-2').remove();
+        $.ajax({
+        url: 'reports/reportsData2/',
+        type: 'POST',
+        data: {data: $('#report2Val').val()},
+        dataType: 'json',
+        success: (data1) => {
+            console.log(data1);
+                var count = 0;
+               var jsonData = data1[0][0];
+               var markup = "<tr class='table-row-2'><th>Heading</th><th>Data</th></tr>"
+               $('.tbody2').append(markup);
+               for(var prop in jsonData){
+                   var markup = "<tr class='table-row-2'><th>"+prop+"</th><td>"+jsonData[prop]+"</td></tr>"
+                   console.log(count +" "+ jsonData[prop])
+                   $('.tbody2').append(markup);
                }
             }   
         })
@@ -24,16 +50,76 @@ $(document).ready(() => {
 
    
 </script>
+
+<div class="container-fluid top-nav">
+    <form class='back' action="/landingPage" method="post">
+        <input class="btn btn-default btn-rounded mb-4 waves-effect waves-light" type="submit" value="Back">
+    </form>
+    <form class='logout' action="/logout" method="post">
+        <input class="btn btn-default btn-rounded mb-4 waves-effect waves-light" type="submit" value="Logout">
+    </form>
+</div>
+
 <div class="container report-container" style="height:100vh">
-    <button id="getReport">getReport</button>
-                <button id="getReport">getReport</button>
     <div class="row reports-row" style="width:100%">
         <div class="report-content col-6">
             <div class="row">
                 <div class="col-12">
-                   
+                    <div class="input-wrapper d-flex justify-content-center align-items-end">
+                        <div class="startDate">
+                            <label for="">Start Date</label>
+                            <input id="report1Date1" type="date">
+                        </div>
+                        <div class="endDate">
+                            <label for="">End Date</label>
+                            <input id="report1Date2" type="date">
+                        </div>
+                        <div class="submit">
+                        </div>
+                            <input id="getReport" type="submit">
+                        
+                    </div>
                     <table id="reports-table" class="table table-striped table-responsive-md">
-                        <tbody>
+                        <tbody class='tbody1'>
+                            <tr class='table-row-1'>
+                                <th>Heading</th>
+                            </tr>
+                            <tr class="table-row-1">
+                                <th>Report Name</th>
+                            </tr>
+                             <tr class="table-row-1">
+                                <th>Total number of invoice</th>
+                            </tr>
+                             <tr class="table-row-1">
+                                <th>Total Transaction Value (Pro-Forma)</th>
+                            </tr>
+                             <tr class="table-row-1">
+                                <th>Total Supplier Invoice Amount</th>
+                            </tr>
+                             <tr class="table-row-1">
+                                <th>Total Buying Agent Invoice Amount</th>
+                            </tr>
+                             <tr class="table-row-1">
+                                <th>Total Duties before savings</th>
+                            </tr>
+                             <tr class="table-row-1">
+                                <th>Total Duties after savings</th>
+                            </tr>
+                             <tr class="table-row-1">
+                                <th>Total Savings</th>
+                            </tr>
+                             <tr class="table-row-1">
+                                <th>20% DHSK Admin</th>
+                            </tr>
+                             <tr class="table-row-1">
+                                <th>20% DSHK Profit Share</th>
+                            </tr>
+                             <tr class="table-row-1">
+                                <th>20% Edgepoint</th>
+                            </tr>
+                             <tr class="table-row-1">
+                                <th>40% Scuderia</th>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -42,8 +128,51 @@ $(document).ready(() => {
         <div class="report-content col-6">
             <div class="row">
                 <div class="col-12">
-                    <table id="reports-table" class="table table-striped table-responsive-md">
-                        <tbody>
+                    <div class="input-wrapper d-flex justify-content-center align-items-end">
+                        <div class="reportNum">
+                            <label for="">Enter Invoice Number:</label>
+                            <input id='report2Val' type="text">
+                        </div>
+                        <input id='getReport2' type="submit">
+                    </div>
+                    <table class="table table-striped table-responsive-md">
+                        <tbody class='tbody2'>
+                            <tr class='table-row-2'>
+                                <th>Heading</th>
+                            </tr>
+                            <tr class="table-row-2">
+                                <th>OrgInv_InvoiceNumber</th>
+                            </tr>
+                             <tr class="table-row-2">
+                                <th>Total Transaction Value (Pro-Forma)</th>
+                            </tr>
+                             <tr class="table-row-2">
+                                <th>Supplier Invoice Amount</th>
+                            </tr>
+                             <tr class="table-row-2">
+                                <th>Buying Agent Invoice Amount</th>
+                            </tr>
+                             <tr class="table-row-2">
+                                <th>Duties before savings</th>
+                            </tr>
+                             <tr class="table-row-2">
+                                <th>Duties after savings</th>
+                            </tr>
+                             <tr class="table-row-2">
+                                <th>Savings</th>
+                            </tr>
+                             <tr class="table-row-2">
+                                <th>20% DHSK Admin</th>
+                            </tr>
+                             <tr class="table-row-2">
+                                <th>20% DSHK Profit Share</th>
+                            </tr>
+                             <tr class="table-row-2">
+                                <th>20% Edgepoint</th>
+                            </tr>
+                             <tr class="table-row-2">
+                                <th>40% Scuderia</th>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
