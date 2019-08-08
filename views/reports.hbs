@@ -18,8 +18,14 @@ $(document).ready(() => {
                var markup = "<tr class='table-row-1'><th>Heading</th><th>Data</th></tr>"
                $('.tbody1').append(markup);
                for(var prop in jsonData){
-                   var markup = "<tr class='table-row-1'><th>"+prop+"</th><td>"+jsonData[prop]+"</td></tr>"
-                   console.log(count +" "+ jsonData[prop])
+                   if(count == 0 || count == 1 ){
+                       var markup = "<tr class='table-row-2'><th>"+prop+"</th><td>"+jsonData[prop]+"</td></tr>"
+                    console.log(count +" "+ jsonData[prop])
+                   }else{
+                    var markup = "<tr class='table-row-2'><th>"+prop+"</th><td>R"+Number(jsonData[prop]).toFixed(2)+"</td></tr>"
+                    console.log(count +" "+ jsonData[prop])
+                   }
+                   count++;
                    $('.tbody1').append(markup);
                }
             }   
@@ -39,8 +45,14 @@ $(document).ready(() => {
                var markup = "<tr class='table-row-2'><th>Heading</th><th>Data</th></tr>"
                $('.tbody2').append(markup);
                for(var prop in jsonData){
-                   var markup = "<tr class='table-row-2'><th>"+prop+"</th><td>"+jsonData[prop]+"</td></tr>"
-                   console.log(count +" "+ jsonData[prop])
+                   if(count == 0 ){
+                       var markup = "<tr class='table-row-2'><th>"+prop+"</th><td>"+jsonData[prop]+"</td></tr>"
+                    console.log(count +" "+ jsonData[prop])
+                   }else{
+                    var markup = "<tr class='table-row-2'><th>"+prop+"</th><td>R"+Number(jsonData[prop]).toFixed(2)+"</td></tr>"
+                    console.log(count +" "+ jsonData[prop])
+                   }
+                   count++;
                    $('.tbody2').append(markup);
                }
             }   

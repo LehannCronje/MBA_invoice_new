@@ -118,6 +118,7 @@ function getSupClientBa(req,res,next){
     var sql = `select * from Customer where Cust_Name='${req.body.client}'`;
     var sql1 = `select * from Supplier where SupplierName='${req.body.sup}'`;
     var sql2 = 'select * from BuyingAgent where BA_ID=1001';
+    var sql3 = `SELECT BAI_InvoiceNumber FROM OriginalInvoiceSummary`;
 
     database.query(sql).then(rows => {
         req.client = rows;
@@ -127,6 +128,16 @@ function getSupClientBa(req,res,next){
         return database.query(sql2);
     }).then(rows => {
         req.ba = rows;
+        console.log(req.ba)
+        return database.query(sql3);
+    }).then(rows => {
+        if(rows.length == 0){
+            req.ba[0].baInvNumber = 'DS1008';
+        }else{
+            var invNum = Number(rows[rows.length-1].BAI_InvoiceNumber.substring(2))+1
+            req.ba[0].baInvNumber = 'DS'+invNum;
+        }
+        console.log(req.ba)
         return next();
     }).catch( err => {
         console.error(err);
@@ -136,19 +147,19 @@ function getSupClientBa(req,res,next){
 }
 function mergeInvoices(req,res,next){
     
-    if(req.body.addProductChecker == 'false'){
-        const files = [
-            `./public/pdf/invoice1.pdf`,
-            `./public/pdf/invoice2.pdf`,
-            `./public/pdf/invoice3.pdf`
-        ];
-        PDFMerge(files, {output: `./public/pdf/merge.pdf`})
-        .then((buffer) => {return next()}).catch((e)=>{
-            console.log(e);
-        });
-    }else{
-        return next();
-    }
-   
+    // if(req.body.addProductChecker == 'false'){
+    //     const files = [
+    //         `./public/pdf/invoice1.pdf`,
+    //         `./public/pdf/invoice2.pdf`,
+    //         `./public/pdf/invoice3.pdf`
+    //     ];
+    //     PDFMerge(files, {output: `./public/pdf/merge.pdf`})
+    //     .then((buffer) => {return next()}).catch((e)=>{
+    //         console.log(e);
+    //     });
+    // }else{
+    //     return next();
+    // }
+   return next();
 }
 module.exports = router;

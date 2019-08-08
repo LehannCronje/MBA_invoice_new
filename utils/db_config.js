@@ -9,7 +9,7 @@ module.exports = class Database {
     constructor() {
         this.connection = mysql.createConnection( {
             host: 'localhost',
-            user:'root',
+            user:'root', //security
             password:'',
             database: 'DB_MBA2',
         } );

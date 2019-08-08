@@ -209,6 +209,8 @@ var buf = doc.getZip()
 fs.writeFileSync(path.resolve(__dirname, '../invoices/invoice2.docx'), buf);
 }
 function createInvoice3(data,sup,cust,general){
+    
+
     var content = fs
     .readFileSync(path.resolve(__dirname, '../templates/DS_invoice2.docx'), 'binary');
 
@@ -224,7 +226,7 @@ doc.setData({
     sAddressNum: sup.Addr_Number,
     sStreet: sup.Addr_Street,
     sCity: sup.Addr_City,
-    invNo:'inv60',
+    invNo:sup.baInvNumber,
     date: general.supInvDate,
     custAccNo: general.custAccNum,
     terms:'',
