@@ -2,7 +2,6 @@
 
 $(document).ready(() => {
     $('#getReport').click(() => {
-        $('.table-row-1').remove();
         $.ajax({
         url: 'reports/reportsData/',
         type: 'post',
@@ -12,52 +11,73 @@ $(document).ready(() => {
         },
         dataType: 'json',
         success: (data1) => {
-            console.log(data1);
+                console.log(data1)
                 var count = 0;
                var jsonData = data1[0][0];
-               var markup = "<tr class='table-row-1'><th>Heading</th><th>Data</th></tr>"
-               $('.tbody1').append(markup);
                for(var prop in jsonData){
-                   if(count == 0 || count == 1 ){
+
+                   if(count == 0 || count == 1){
+                       $('.table-row-1-td-'+count).text(jsonData[prop]);
+                   }else{
+                    $('.table-row-1-td-'+count).text("R"+numberWithCommas(Number(jsonData[prop]).toFixed(2)));
+                   }
+
+                    count++;
+
+
+
+                   {{!-- if(count == 0 || count == 1 ){
                        var markup = "<tr class='table-row-2'><th>"+prop+"</th><td>"+jsonData[prop]+"</td></tr>"
-                    console.log(count +" "+ jsonData[prop])
+
                    }else{
                     var markup = "<tr class='table-row-2'><th>"+prop+"</th><td>R"+Number(jsonData[prop]).toFixed(2)+"</td></tr>"
                     console.log(count +" "+ jsonData[prop])
                    }
                    count++;
-                   $('.tbody1').append(markup);
+                   $('.tbody1').append(markup); --}}
                }
             }   
         })
     })
     $('#getReport2').click(() => {
-        $('.table-row-2').remove();
         $.ajax({
         url: 'reports/reportsData2/',
         type: 'POST',
         data: {data: $('#report2Val').val()},
         dataType: 'json',
         success: (data1) => {
-            console.log(data1);
+            
                 var count = 0;
                var jsonData = data1[0][0];
-               var markup = "<tr class='table-row-2'><th>Heading</th><th>Data</th></tr>"
-               $('.tbody2').append(markup);
                for(var prop in jsonData){
-                   if(count == 0 ){
+
+                   if(count == 0 || count == 1){
+                       $('.table-row-2-td-'+count).text(jsonData[prop]);
+                   }else{
+                    $('.table-row-2-td-'+count).text("R"+numberWithCommas(Number(jsonData[prop]).toFixed(2)));
+                   }
+
+                    count++;
+
+
+                   {{!-- if(count == 0 ){
                        var markup = "<tr class='table-row-2'><th>"+prop+"</th><td>"+jsonData[prop]+"</td></tr>"
                     console.log(count +" "+ jsonData[prop])
                    }else{
-                    var markup = "<tr class='table-row-2'><th>"+prop+"</th><td>R"+Number(jsonData[prop]).toFixed(2)+"</td></tr>"
+                    var markup = "<tr class='table-row-2'><th>"+prop+"</th><td>R"++"</td></tr>"
                     console.log(count +" "+ jsonData[prop])
                    }
                    count++;
-                   $('.tbody2').append(markup);
+                   $('.tbody2').append(markup); --}}
                }
             }   
         })
     })
+
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 })
 
    
@@ -77,6 +97,7 @@ $(document).ready(() => {
         <div class="report-content col-6">
             <div class="row">
                 <div class="col-12">
+                   
                     <div class="input-wrapper d-flex justify-content-center align-items-end">
                         <div class="startDate">
                             <label for="">Start Date</label>
@@ -91,46 +112,52 @@ $(document).ready(() => {
                             <input id="getReport" type="submit">
                         
                     </div>
+                     <h3 class="table-row-1-td-0"></h3>
                     <table id="reports-table" class="table table-striped table-responsive-md">
                         <tbody class='tbody1'>
-                            <tr class='table-row-1'>
-                                <th>Heading</th>
-                            </tr>
-                            <tr class="table-row-1">
-                                <th>Report Name</th>
-                            </tr>
                              <tr class="table-row-1">
                                 <th>Total number of invoice</th>
+                                <td class="table-row-1-td-1"></td>
                             </tr>
                              <tr class="table-row-1">
                                 <th>Total Transaction Value (Pro-Forma)</th>
+                                <td class="table-row-1-td-2"></td>
                             </tr>
                              <tr class="table-row-1">
                                 <th>Total Supplier Invoice Amount</th>
+                                <td class="table-row-1-td-3"></td>
                             </tr>
                              <tr class="table-row-1">
                                 <th>Total Buying Agent Invoice Amount</th>
+                                <td class="table-row-1-td-4"></td>
                             </tr>
                              <tr class="table-row-1">
                                 <th>Total Duties before savings</th>
+                                <td class="table-row-1-td-5"></td>
                             </tr>
                              <tr class="table-row-1">
                                 <th>Total Duties after savings</th>
+                                <td class="table-row-1-td-6"></td>
                             </tr>
                              <tr class="table-row-1">
                                 <th>Total Savings</th>
+                                <td class="table-row-1-td-7"></td>
                             </tr>
                              <tr class="table-row-1">
                                 <th>20% DHSK Admin</th>
+                                <td class="table-row-1-td-8"></td>
                             </tr>
                              <tr class="table-row-1">
                                 <th>20% DSHK Profit Share</th>
+                                <td class="table-row-1-td-9"></td>
                             </tr>
                              <tr class="table-row-1">
                                 <th>20% Edgepoint</th>
+                                <td class="table-row-1-td-10"></td>
                             </tr>
                              <tr class="table-row-1">
                                 <th>40% Scuderia</th>
+                                <td class="table-row-1-td-11"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -140,6 +167,7 @@ $(document).ready(() => {
         <div class="report-content col-6">
             <div class="row">
                 <div class="col-12">
+                    
                     <div class="input-wrapper d-flex justify-content-center align-items-end">
                         <div class="reportNum">
                             <label for="">Enter Invoice Number:</label>
@@ -147,43 +175,52 @@ $(document).ready(() => {
                         </div>
                         <input id='getReport2' type="submit">
                     </div>
+                    <h3 class="table-row-2-td-0"></h3>
                     <table class="table table-striped table-responsive-md">
                         <tbody class='tbody2'>
-                            <tr class='table-row-2'>
-                                <th>Heading</th>
-                            </tr>
                             <tr class="table-row-2">
                                 <th>OrgInv_InvoiceNumber</th>
+                                <td class="table-row-2-td-1"></td>
                             </tr>
                              <tr class="table-row-2">
                                 <th>Total Transaction Value (Pro-Forma)</th>
+                                <td class="table-row-2-td-2"></td>
                             </tr>
                              <tr class="table-row-2">
                                 <th>Supplier Invoice Amount</th>
+                                <td class="table-row-2-td-3"></td>
                             </tr>
                              <tr class="table-row-2">
                                 <th>Buying Agent Invoice Amount</th>
+                                <td class="table-row-2-td-4"></td>
                             </tr>
                              <tr class="table-row-2">
                                 <th>Duties before savings</th>
+                                <td class="table-row-2-td-5"></td>
                             </tr>
                              <tr class="table-row-2">
                                 <th>Duties after savings</th>
+                                <td class="table-row-2-td-6"></td>
                             </tr>
                              <tr class="table-row-2">
                                 <th>Savings</th>
+                                <td class="table-row-2-td-7"></td>
                             </tr>
                              <tr class="table-row-2">
                                 <th>20% DHSK Admin</th>
+                                <td class="table-row-2-td-8"></td>
                             </tr>
                              <tr class="table-row-2">
                                 <th>20% DSHK Profit Share</th>
+                                <td class="table-row-2-td-9"></td>
                             </tr>
                              <tr class="table-row-2">
                                 <th>20% Edgepoint</th>
+                                <td class="table-row-2-td-10"></td>
                             </tr>
                              <tr class="table-row-2">
                                 <th>40% Scuderia</th>
+                                <td class="table-row-2-td-11"></td>
                             </tr>
                         </tbody>
                     </table>
