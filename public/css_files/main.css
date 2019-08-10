@@ -199,6 +199,9 @@ html, body {
   padding: 15px; }
   .report-content h3 {
     text-align: center; }
+  .report-content h1 {
+    text-align: center;
+    text-transform: uppercase; }
   .report-content .input-wrapper {
     margin: 5px 0px 30px 0px; }
   .report-content input[type=submit] {
