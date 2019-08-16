@@ -23,9 +23,9 @@ function getProducts(req,res,next){
         req.session.clientID = clientSplit[0];
         req.session.sup = supSplit[1];
         req.session.client = clientSplit[1];
-        var sql = `SELECT * FROM Product WHERE SupplierID=${req.session.supID}`;
+        var sql = `SELECT * FROM Product WHERE SupplierID=${req.session.supID} ORDER BY ProdDescription ASC`;
     }else{
-        var sql = `SELECT * FROM Product WHERE SupplierID=${req.session.supID}`;
+        var sql = `SELECT * FROM Product WHERE SupplierID=${req.session.supID} ORDER BY ProdDescription ASC`;
     }
     if(!req.session.generalData){
         req.session.general = {

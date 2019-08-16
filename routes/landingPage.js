@@ -17,9 +17,16 @@ connection.connect(function(err){
     console.log('connected to the database');
 });
 
-/* GET home page. */
-router.post('/', authUser,function(req, res, next) {
+router.post('/', authUser,function(req, res) {
     res.render('landingPage');
+});
+
+router.get('/', function(req, res){
+    if(req.session.username){
+        res.render('landingPage');
+    }else{
+        res.redirect('/');
+    }
 });
 
 function authUser(req,res,next){

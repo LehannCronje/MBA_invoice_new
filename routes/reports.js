@@ -18,7 +18,11 @@ var database = new db();
     })
   })
   router.get('/', (req,res) => {
-    res.render('reports');
+    if(req.session.username){
+      res.render('reports');
+  }else{
+      res.redirect('/');
+  }
   })
 
   module.exports = router;

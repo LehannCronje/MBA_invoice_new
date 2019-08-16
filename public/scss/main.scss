@@ -6,6 +6,17 @@ html, body{
     // background-image: linear-gradient(to bottom left, white, rgb(51,122,183));
 }
 .top-nav{
+    button{
+        background-color:rgb(51,122,183);
+        margin-right:5px;
+        font-weight:600;
+        border:none;
+        text-transform: uppercase;
+        a{
+            color:white;
+            text-decoration: none;
+        }
+    }
     display:flex;
     input[type=submit]{
         background-color:rgb(51,122,183);
@@ -55,7 +66,7 @@ html, body{
         }
     }
     .invoice-wrapper{
-        
+        min-width:500px;
         padding:50px;
         background-color:rgb(240,248,255);
         // border-radius:5px;

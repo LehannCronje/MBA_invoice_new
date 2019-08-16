@@ -1,4 +1,5 @@
 <div class="container-fluid top-nav">
+    <button class="btn btn-default btn-rounded mb-4 waves-effect waves-light"><a href="/landingPage">Home</a></button>
     <form class='back' action="/invoice" method="post">
         <input class="btn btn-default btn-rounded mb-4 waves-effect waves-light" type="submit" value="Back">
     </form>
@@ -13,7 +14,7 @@
             <p>The Invoices are now genereated.</p>
             <p>You can preview them or download them.</p>
             <div class="preview-wrapper">
-                <button class="btn btn-default btn-rounded mb-4 waves-effect waves-light"><a href="/pdf/merge.pdf" target='_blank'>preview</a></button>
+                <button class="btn btn-default btn-rounded mb-4 waves-effect waves-light"><a href="/pdf/preview.pdf" target='_blank'>preview</a></button>
                 <form action="/download" method="post">
                     <input class="btn btn-default btn-rounded mb-4 waves-effect waves-light" type="submit" value="Download">
                 </form>

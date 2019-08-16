@@ -153,7 +153,7 @@ function mergeInvoices(req,res,next){
             `./public/pdf/invoice2.pdf`,
             `./public/pdf/invoice3.pdf`
         ];
-        PDFMerge(files, {output: `./public/pdf/merge.pdf`})
+        PDFMerge(files, {output: `./public/pdf/preview.pdf`})
         .then((buffer) => {return next()}).catch((e)=>{
             console.log(e);
         });

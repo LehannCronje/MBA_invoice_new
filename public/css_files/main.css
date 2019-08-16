@@ -9,6 +9,15 @@ html, body {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex; }
+  .top-nav button {
+    background-color: #337ab7;
+    margin-right: 5px;
+    font-weight: 600;
+    border: none;
+    text-transform: uppercase; }
+    .top-nav button a {
+      color: white;
+      text-decoration: none; }
   .top-nav input[type=submit] {
     background-color: #337ab7;
     color: white;
@@ -46,6 +55,7 @@ html, body {
       display: block;
       text-align: left; }
   .login-container .invoice-wrapper {
+    min-width: 500px;
     padding: 50px;
     background-color: aliceblue;
     -webkit-box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.2), 0 2px 30px 0 rgba(0, 0, 0, 0.35);
